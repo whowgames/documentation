@@ -19,7 +19,7 @@ Table of Contents
     - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)  
 
 - [Calls](#calls)  
-    - [Resource: GameSessions](#_Toc397704940)  
+    - [Resource: GameSessions](#resourcegamesessions)  
         - [GameSessions::get](#gamesessionsget)  
         - [GameSessions::wallet](#gamesessionswallet)  
         - [GameSessions::play](#gamesessionsplay)  
@@ -223,7 +223,7 @@ Periodic Wallet Update in Idle Mode
 --------------------------
 
 Since there are a lot of other actions running on our casino which can cause the users wallet ingame to get out of sync with the one from the casino you should periodically fetch the wallet and update the chips.
-To avoid spamming the API it would be good to only query this information when the game is in some kind of idle mode. This means for example that the user has not done any action within the last 30 seconds. After that time frame it is best to call the every 30 seconds to fetch a new balance. This can be achieved by using the [GameSessions::wallet](GameSessions::wallet) call.
+To avoid spamming the API it would be good to only query this information when the game is in some kind of idle mode. This means for example that the user has not done any action within the last 30 seconds. After that time frame it is best to call the every 30 seconds to fetch a new balance. This can be achieved by using the [GameSessions::wallet](#gameSessionswallet) call.
 
 Calls
 =====
