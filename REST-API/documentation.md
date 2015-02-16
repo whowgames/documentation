@@ -41,7 +41,7 @@ Revision History
 Copyright
 =========
 
-Copyright © 2015 Whow Games GmbH. All rights reserved.
+Copyright © 2014 - 2015 Whow Games GmbH. All rights reserved.
 
 Introduction
 ============
