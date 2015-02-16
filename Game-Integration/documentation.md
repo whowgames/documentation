@@ -10,6 +10,7 @@ Table of Contents
 - [Getting started](#getting-started)
 - [GET Parameters](#get-parameters)
 - [Resolutions](#resolutions)
+- [Assets](#assets)
 
 Revision History
 ================
@@ -19,7 +20,7 @@ Revision History
 | 0.1      | 05.09.2014 | Initial version | fschemmer | -            |
 | 0.2       | 15.09.2014 | Added easyXDM sound | fschemmer | -            |
 | 0.3       | 13.10.2014 | Added new bets | fschemmer | -            |
-| 0.4       | 16.02.2015 | Updated document from .docX -> .md, removed easyXDM, added Resolutions | fschemmer | -        |
+| 0.4       | 16.02.2015 | Updated document from .docX -> .md, removed easyXDM, added Resolutions, added Assets | fschemmer | -        |
 
 Copyright
 =========
@@ -63,3 +64,16 @@ To give the user the best experience possible we have some game resolution restr
 > Min Resolution
 >
 >     902x580
+
+Assets
+======
+For each game we need two different sized game icons to display them throughout our portal and one background image to display it behind the game when the game is played. Please make sure that they are already compressed and ready for being uploaded to our production servers.
+
+> Game Icon
+> 
+>      85x85 pixels
+>      180x180 pixels
+
+> Background
+> 
+>     1920x900 pixels
