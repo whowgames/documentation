@@ -50,8 +50,8 @@ The parameters we are providing to you have different use cases. Next is a list 
 | **Name** | **Type** | **Example Value**        | **Description**      |
 |----------|----------|--------------------------|----------------------|
 | token | String   | 54e1fd3dd4b9a4653c8b4567 | token you receive to authenticate yourself at the REST API |
-| sound | Integer | 0 | indicates if sound is turned off (0) or on (1) |
-| locale | Char(5) | de_DE | language code (ISO 639) + \"\_\" + geo code (ISO 3166) |
+| sound | Integer | 0 | indicates if sound is turned off (0) or on (1) |
+| locale | Char(5) | de_DE | language code (ISO 639) + \"\_\" + geo code (ISO 3166) |
 
 Resolutions
 ==========
@@ -64,6 +64,7 @@ To give the user the best experience possible we have some game resolution restr
 > Min Resolution
 >
 >     902x580
+<<<<<<< HEAD
 
 Assets
 ======
@@ -77,3 +78,5 @@ For each game we need two different sized game icons to display them throughout 
 > Background
 > 
 >     1920x900 pixels
+=======
+>>>>>>> 66c9cfedea85fedab8f58c7b59e6cc9bcd4fb8aa
