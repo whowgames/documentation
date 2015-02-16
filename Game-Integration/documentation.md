@@ -64,7 +64,6 @@ To give the user the best experience possible we have some game resolution restr
 > Min Resolution
 >
 >     902x580
-<<<<<<< HEAD
 
 Assets
 ======
@@ -78,5 +77,3 @@ For each game we need two different sized game icons to display them throughout 
 > Background
 > 
 >     1920x900 pixels
-=======
->>>>>>> 66c9cfedea85fedab8f58c7b59e6cc9bcd4fb8aa
