@@ -9,7 +9,6 @@ Table of Contents
 - [Introduction](#introduction)
 - [Getting started](#getting-started)
 - [Structure of REST URIs](#structure-of-rest-uris)
- 
 - [Authentication](#authentication)
     - [Create a canonical request](#create-a-canonical-request)
     - [Create a String to Sign](#create-a-string-to-sign)
