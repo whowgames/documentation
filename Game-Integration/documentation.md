@@ -19,7 +19,7 @@ Revision History
 | 0.1      | 05.09.2014 | Initial version | fschemmer | -            |
 | 0.2       | 15.09.2014 | Added easyXDM sound | fschemmer | -            |
 | 0.3       | 13.10.2014 | Added new bets | fschemmer | -            |
-| 0.4       | 16.02.2015 | Updated document from .docX -> .md, removed easyXDM | fschemmer | -        |
+| 0.4       | 16.02.2015 | Updated document from .docX -> .md, removed easyXDM, added Resolutions | fschemmer | -        |
 
 Copyright
 =========
@@ -42,7 +42,7 @@ GET Parameters
 When your game is loaded via easyXDM we will append some GET parameters to the URI which you need to parse and react to.  
 Your game URI might look like this then:
 
->https://yourCompany.com/myGame?token= 54e1fd3dd4b9a4653c8b4567&sound=0&locale=de_DE
+>https://yourCompany.com/myGame?token=54e1fd3dd4b9a4653c8b4567&sound=0&locale=de_DE
 
 The parameters we are providing to you have different use cases. Next is a list of what parameters might be present – they don’t have to – and what they are used for.
 
