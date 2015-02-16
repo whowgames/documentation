@@ -19,7 +19,7 @@ Table of Contents
     - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)  
 
 - [Calls](#calls)  
-    - [Resource: GameSessions](#resourcegamesessions)  
+    - [Resource: GameSessions](#resource-gamesessions)  
         - [GameSessions::get](#gamesessionsget)  
         - [GameSessions::wallet](#gamesessionswallet)  
         - [GameSessions::play](#gamesessionsplay)  
