@@ -369,7 +369,7 @@ The game settings object contains the following parameters:
 GameSessions::wallet
 --------------------
 
-The call *wallet* is used to request the current user
+The call *wallet* is used to request the current user wallet with all available balances.
 
 #### HTTP Method
 
