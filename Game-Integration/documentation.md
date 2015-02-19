@@ -67,8 +67,9 @@ To give the user the best experience possible we have some game resolution restr
 
 Assets
 ======
-For each game we need two different sized game icons to display them throughout our portal and one background image to display it behind the game when the game is played. Please make sure that they are already compressed and ready for being uploaded to our production servers.  
-When you have all assets ready please archive them and send them to <assets@whow.net>.
+For each game we need two different sized game icons to display them throughout our portal and one background image to display it behind the game when the game is played. Please make sure that they are already compressed and ready for being uploaded to our production servers
+
+When you have all assets ready please separate them by game name folders, archive all folders in a .zip or .rar archive and send them to <assets@whow.net>.
 
 > Game Icon
 >
