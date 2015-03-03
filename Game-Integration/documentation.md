@@ -15,12 +15,13 @@ Table of Contents
 Revision History
 ================
 
-| **Version** | **Date**   | **Changes**                                        | **Name**  | **Approved** |
-|-------------|------------|----------------------------------------------------|-----------|--------------|
-| 0.1      | 05.09.2014 | Initial version | fschemmer | -            |
-| 0.2       | 15.09.2014 | Added easyXDM sound | fschemmer | -            |
-| 0.3       | 13.10.2014 | Added new bets | fschemmer | -            |
-| 0.4       | 16.02.2015 | Updated document from .docX -> .md, removed easyXDM, added Resolutions, added Assets | fschemmer | -        |
+| **Version** | **Date**   | **Changes**                                        | **Name**  |
+|-------------|------------|----------------------------------------------------|-----------|
+| 0.1 | 05.09.2014 | Initial version | fschemmer |
+| 0.2 | 15.09.2014 | Added easyXDM sound | fschemmer |
+| 0.3 | 13.10.2014 | Added new bets | fschemmer |
+| 0.4 | 16.02.2015 | Updated document from .docX -> .md, removed easyXDM, added Resolutions, added Assets | fschemmer |
+| 0.4.1 | 03.03.2015 | Added new assets for Slots and Tablegames | fschemmer |
 
 Copyright
 =========
@@ -67,15 +68,38 @@ To give the user the best experience possible we have some game resolution restr
 
 Assets
 ======
-For each game we need two different sized game icons to display them throughout our portal and one background image to display it behind the game when the game is played. Please make sure that they are already compressed and ready for being uploaded to our production servers
+For each game we need two different sized game icons to display them throughout our portal and one background image to display it behind the game when the game is played. Besides that there are different type of assets depending on the type of game (slot or tablegame). You can find a folder with samples and a .psd file with templates for Slots and Tablegames [here](samples/). Please make sure that your graphics are already properly compressed and ready for being uploaded to our production servers.
 
 When you have all assets ready please separate them by game name folders, archive all folders in a .zip or .rar archive and send them to <assets@whow.net>.
 
-> Game Icon
->
->      artwork-85x85.jpg: 85x85 pixels
->      artwork-180x180.jpg: 180x180 pixels
+##General##
 
-> Wallpaper
-> 
->     wallpaper-1920x900.jpg: 1920x900 pixels
+**Game Icons**
+
+| **Filename** | **Filetype** | **Size** | **Transparency** | **Description** |
+|--------------|--------------|----------|------------------|-----------------|
+| artwork-85x85.jpg | jpg | 85 x 85 | no | should showcase the game name / a logo |
+| artwork-180x180.jpg | jpg | 180x180 | no | should showcase the game name / a logo |
+
+**Wallpapers**
+ 
+| **Filename** | **Filetype** | **Size** | **Transparency** | **Description** |
+|--------------|--------------|----------|------------------|-----------------|
+| wallpaper-1920x900.jpg | jpg | 1920x900 | no | background image which works well with the game |
+
+##Slots##
+
+**Lobby Icons**
+ 
+| **Filename** | **Filetype** | **Size** | **Transparency** | **Description** |
+|--------------|--------------|----------|------------------|-----------------|
+| artwork-142x100.jpg | jpg | 142x100 | no | should showcase the game name |
+| artwork-135x84.jpg | jpg | 135x84 | no | should showcase game console / reels |
+
+##Tablegames (Black Jack, Poker, Roulette, Baccara, ...)##
+
+**Lobby Icons**
+ 
+| **Filename** | **Filetype** | **Size** | **Transparency** | **Description** |
+|--------------|--------------|----------|------------------|-----------------|
+| artwork-190x326.png | png | 190x326 | yes |should showcase the game name / a logo |
