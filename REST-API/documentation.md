@@ -223,7 +223,7 @@ Periodic Wallet Update in Idle Mode
 --------------------------
 
 Since there are a lot of other actions running on our casino which can cause the users wallet ingame to get out of sync with the one from the casino you should periodically fetch the wallet and update the chips.
-To avoid spamming the API it would be good to only query this information when the game is in some kind of idle mode. This means for example that the user has not done any action within the last 30 seconds. After that time frame it is best to call the every 30 seconds to fetch a new balance. This can be achieved by using the [GameSessions::wallet](#gamesessionswallet) call.
+To avoid spamming the API it would be good to only query this information when the game is in some kind of idle mode. This means for example that the user has not done any action within the last 30 seconds. After that time frame it is best to call the API every 30 seconds to fetch a new balance. This can be achieved by using the [GameSessions::wallet](#gamesessionswallet) call.
 
 Calls
 =====
@@ -292,7 +292,9 @@ Resource: GameSessions
 GameSessions::get
 -----------------
 
-The call *get* is used to request data for the current game session, including game and user data. Please note that game settings can be changed by subsequent requests and events like leveling up for example.
+The call *get* is used to request data for the current game session, including game and user data. This call can only be used once and is not allowed a second time for the given token. Make sure to **always** call this method on game startup.
+
+Please note that game settings can be changed by subsequent requests and events like leveling up for example and are therefor not fix.
 
 #### HTTP Method
 
@@ -364,7 +366,8 @@ The game settings object contains the following parameters:
 
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
-| 400             | token is probably corrupted, try to get a new token |
+| 400             | token seems to be corrupt please request a new one  |
+| 410             | token has already been used to retrieve this game session |
 
 GameSessions::wallet
 --------------------
@@ -421,7 +424,7 @@ The wallet object contains the following parameters:
 
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
-| 400             | token is probably corrupted, try to get a new token |
+| 400             | token seems to be corrupt please request a new one |
 
 GameSessions::play
 ------------------
@@ -445,9 +448,8 @@ The call *play* is used to instantly play a complete game round with a given bet
 | **Name**      | **Type** | **Example Value**  | **Description**                                |
 |---------------|----------|--------------------|------------------------------------------------|
 | betAmount     | Float    | 1250               | amount to bet in this round                    |
-| virtualAmount | Float    | 0                  | amount to bet in case of free spins            |
+| virtualAmount | Float    | 0                  | amount to bet in case of free spins; important: this parameter is optional and only used in special cases for freespins!         |
 | winAmount     | Float    | 0                  | amount the user will win in this round         |
-| gameData      | Object   | {“spinResult”:[…]} | gameData the game wants to track to the casino |
 
 #### 
 
@@ -517,7 +519,6 @@ The game object can contain the following parameters but doesn’t need to have 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
 | settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
-| stopAutoPlay | Boolean  | 1                        | determines if the game should stop auto play mode |
 
 The game settings object contains the following parameters:
 
@@ -530,7 +531,7 @@ The game settings object contains the following parameters:
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
 | 110             | error while trying to book chips from/to the user, most likely the user has not enough chips |
-| 400             | token is probably corrupted, try to get a new token |
+| 400             | token seems to be corrupt please request a new one |
 | 400             | parameters are missing                              |
 
 GameSessions::bet
@@ -555,8 +556,7 @@ The call *bet* is used to bet on a game round. Important: If there is no round i
 | **Name**      | **Type** | **Example Value**   | **Description**                                                                                                          |
 |---------------|----------|---------------------|--------------------------------------------------------------------------------------------------------------------------|
 | betAmount     | Float    | 1250                | amount to bet in this round                                                                                              |
-| virtualAmount | Float    | 0                   | amount to bet in case of free spins                                                                                      |
-| gameData      | Object   | {“spinResult”:[…]}  | gameData the game wants to track to the casino                                                                           |
+| virtualAmount | Float    | 0                  | amount to bet in case of free spins; important: this parameter is optional and only used in special cases for freespins!         |
 | roundId       | String   | “ca5217a205e148ba…“ | round id to bet on; important: this parameter is optional! if it is not provided the backend will start a new game round |
 
 #### Example request
@@ -625,7 +625,6 @@ The game object can contain the following parameters but doesn’t need to have 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
 | settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
-| stopAutoPlay | Boolean  | 1                        | determines if the game should stop auto play mode |
 
 The game settings object contains the following parameters:
 
@@ -638,7 +637,7 @@ The game settings object contains the following parameters:
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
 | 110             | error while trying to book chips from/to the user, most likely the user has not enough chips |
-| 400             | token is probably corrupted, try to get a new token |
+| 400             | token seems to be corrupt please request a new one |
 | 400             | parameters are missing                              |
 | 400             | round status is not open                            |
 | 400             | round id is not valid                               |
@@ -725,7 +724,6 @@ The game object can contain the following parameters but doesn’t need to have 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
 | settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
-| stopAutoPlay | Boolean  | 1                        | determines if the game should stop auto play mode |
 
 The game settings object contains the following parameters:
 
@@ -738,7 +736,7 @@ The game settings object contains the following parameters:
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
 | 110             | error while trying to book chips from/to the user   |
-| 400             | token is probably corrupted, try to get a new token |
+| 400             | token seems to be corrupt please request a new one |
 | 400             | parameters are missing                              |
 | 400             | round status is not open                            |
 | 400             | round id it not valid                               |
@@ -823,7 +821,6 @@ The game object can contain the following parameters but doesn’t need to have 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
 | settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
-| stopAutoPlay | Boolean  | 1                        | determines if the game should stop auto play mode |
 
 The game settings object contains the following parameters:
 
@@ -836,7 +833,7 @@ The game settings object contains the following parameters:
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
 | 110             | error while trying to book chips from/to the user   |
-| 400             | token is probably corrupted, try to get a new token |
+| 400             | token seems to be corrupt please request a new one |
 | 400             | parameters are missing                              |
 | 400             | round status is not open                            |
 | 400             | round id it not valid                               |
