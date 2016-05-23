@@ -26,6 +26,7 @@ Table of Contents
         - [GameSessions::bet](#gamesessionsbet)  
         - [GameSessions::close](#gamesessionsclose)  
         - [GameSessions::cancel](#gamesessionscancel)
+        - [GameSessions::validateFreespins](#gamesessionsvalidatefreespins)
 
 Revision History
 ================
@@ -36,12 +37,13 @@ Revision History
 | 1.0.0       | 05.09.2014 | Camel Casing                                       | fschemmer | -            |
 | 1.0.1       | 08.09.2014 | Added user variables                               | fschemmer | -            |
 | 1.0.2       | 13.10.2014 | Added new bet amounts, virtualAmount and stop on autoPlay | fschemmer | -            |
-| 1.1         | 16.02.2015 | Update document from .docX -> .md, various updates & fixes, added "Best Practices" section | fschemmer | -            |
+| 1.1         | 16.02.2015 | Update document from .docX -> .md, various updates & fixes, added "Best Practices" section | fschemmer | -           
+| 1.2         | 23.05.2016 | Updated copyright, added freespins with fixed bet amount | fschemmer | - |
 
 Copyright
 =========
 
-Copyright © 2014 - 2015 Whow Games GmbH. All rights reserved.
+Copyright © 2014 - 2016 Whow Games GmbH. All rights reserved.
 
 Introduction
 ============
@@ -92,7 +94,7 @@ The next steps will guide you through the process of creating the authorization 
 Content-Type: application/json; charset=utf-8  
 X-whow-date: 20140828T163000Z  
 
->{“name”:”John Doe”}
+>{"name":"John Doe"}
 
 After you have created a signature for this call it might look like this.
 
@@ -103,7 +105,7 @@ Host: api.whow.com
 Content-Type: application/json; charset=utf-8  
 X-whow-date: 20140828T163000Z
 
->{“name”:”John Doe”}
+>{"name":"John Doe"}
 
 Create a canonical request
 --------------------------
@@ -139,10 +141,10 @@ To create a canonical request, concatenate the following components from each st
 4.  Add the signed headers followed by a newline character. This value is a list of the names of the headers that were included as canonical headers in step 3. Each header that is specified here must be in the real request and in the canonical headers as well. Make sure that each header name is lowercase and that all header names are sorted alphabetically. All header names are then concatenated into a string separating each header with a semi colon.
     >content-type;host;x-whow-date\\n
 
-5.  Use a hash function like SHA-256 to create a hash value of the JSON payload you are sending with your request. Keep in mind that by HTTP standards there can’t be a payload if you are using GET as request method. In this case you need to provide an empty string *””* into the hashing method. In case of any other request method without payload you need to supply an empty JSON array ‘*[]*’ as string. In case you have a JSON string as payload you will use this string as is.
+5.  Use a hash function like SHA-256 to create a hash value of the JSON payload you are sending with your request. Keep in mind that by HTTP standards there can’t be a payload if you are using GET as request method. In this case you need to provide an empty string *""* into the hashing method. In case of any other request method without payload you need to supply an empty JSON array ‘*[]*’ as string. In case you have a JSON string as payload you will use this string as is.
     >Sample payload:
     >
-    >     {“name”:”John Doe”}  
+    >     {"name":"John Doe"}  
     >Hashed payload:
     >
     >     d360d2dd3b386b4e64fbc4791e14b48ed4c71c07247b25255baf532d34f424fa
@@ -193,8 +195,8 @@ Before you calculate the signature you need to derive a signing key from your se
 
 1.  Derive your signing key by using your secret key to create a series of hash-based message authentication codes (HMACs). In the following example HMAC represents an HMAC-SHA256 function. However: You need to use the same hashing algorithm within the HMAC function as you used for all the previous hashing operations as well. The result of each hash functions becomes input for the next one. The following pseudo code will use the HMAC function with (key, data) as parameters:**
     >Secret = Your Secret Key  
-    Date = HMAC(“whow” + Secret, Date)  
-    SigningKey = HMAC(Date, “whow\_request”)  
+    Date = HMAC("whow" + Secret, Date)  
+    SigningKey = HMAC(Date, "whow\_request")  
     
     Note that the variable *Date* used in the hashing process is just the date (for example, 20140828), not a complete date and time.
 
@@ -236,7 +238,7 @@ This is a success JSON encoded response to give you a better understanding:
    **"status"**:200,  
    **"payload"**:{  
       **"user"**:{  
-         “**id"**:"53fc9eb31b4d5eef118b4569",  
+         "**id"**:"53fc9eb31b4d5eef118b4569",  
          **"gender"**:"male",  
          **"locale"**:"de\_DE",  
          **"name"**:"john\_doe",  
@@ -296,6 +298,8 @@ The call *get* is used to request data for the current game session, including g
 
 Please note that game settings can be changed by subsequent requests and events like leveling up for example and are therefor not fix.
 
+In case you are using the freespin object, which is part of the game object, to obtain freespins from the casino, make sure to validate the freespins with the extra call [GameSessions::validateFreespins](#gamesessionsvalidatefreespins) after you have received them in this call.
+
 #### HTTP Method
 
 >POST
@@ -327,18 +331,18 @@ The following objects will be within the payload object in the JSON response:
 
 | **Name** | **Type** | **Example Value**                    | **Description** |
 |----------|----------|--------------------------------------|-----------------|
-| user     | Object   | {"\_id":"53fc9eb31b4d5eef118b4569","username":"john\_doe”}   | user object     |
+| user     | Object   | {"\_id":"53fc9eb31b4d5eef118b4569","username":"john\_doe"}   | user object     |
 | game     | Object   | {"settings":{"bets":[50, 100, 250]}} | game object     |
 
 The user object contains the following parameters:
 
 | **Name**      | **Type**   | **Example Value**          | **Description**                                           |
 |---------------|------------|----------------------------|-----------------------------------------------------------|
-| id            | String     | “53fc9eb31b4d5eef118b4569” | id of the user                                            |
-| name          | String     | “john\_doe”                | name of the user                                          |
-| locale        | Char(5)    | “de\_DE”                   | locale of the user                                        |
-| gender        | String     | “male”                     | gender of the user                                        |
-| wallet        | Object     | {“chips”: 1250.00}         | wallet object                                             |
+| id            | String     | "53fc9eb31b4d5eef118b4569" | id of the user                                            |
+| name          | String     | "john\_doe"                | name of the user                                          |
+| locale        | Char(5)    | "de\_DE"                   | locale of the user                                        |
+| gender        | String     | "male"                     | gender of the user                                        |
+| wallet        | Object     | {"chips": 1250.00}         | wallet object                                             |
 | level         | Integer    | 100                        | level of the user                                         |
 | levelProgress | Float(1,2) | 0.04                       | progress of the user to the next level in percent (0 – 1) |
 
@@ -352,13 +356,23 @@ The game object contains the following parameters:
 
 | **Name** | **Type** | **Example Value**        | **Description**      |
 |----------|----------|--------------------------|----------------------|
-| settings | Object   | {“bets”: [50, 100, 250]} | game settings object |
+| settings | Object   | {"bets": [50, 100, 250]} | game settings object |
+| freespins | Object Array | [{"id": "53f...", "amount": 12, "betAmount": 1250.00}] | freespins obviouslyject |
 
 The game settings object contains the following parameters:
 
 | **Name** | **Type** | **Example Value** | **Description**             |
 |----------|----------|-------------------|-----------------------------|
-| bets     | Array    | [50, 100, 250]    | currently allowed bet sizes |
+| bets     | Array    | [400, 8000, 125000]    | currently allowed bet sizes |
+
+The freespins object contains the following parameters:
+
+| **Name** | **Type** | **Example Value** | **Description**             |
+|----------|----------|-------------------|-----------------------------|
+| id       | String   | "53fc9eb31b4d5eef118b4569" | id of the freespin set |
+| amount   | Integer  | 12 | amount of freespins |
+| betAmount | Float(19,4) | 1250.00 | bet amount of each freespin |
+
 
 #### 
 
@@ -406,13 +420,13 @@ The following objects will be within the payload object in the JSON response:
 
 | **Name** | **Type** | **Example Value**             | **Description** |
 |----------|----------|-------------------------------|-----------------|
-| user     | Object   | {“wallet”: {“chips”:1250.00}} | user object     |
+| user     | Object   | {"wallet": {"chips":1250.00}} | user object     |
 
 The user object contains the following parameters:
 
 | **Name** | **Type** | **Example Value**  | **Description** |
 |----------|----------|--------------------|-----------------|
-| wallet   | Object   | {“chips”: 1250.00} | wallet object   |
+| wallet   | Object   | {"chips": 1250.00} | wallet object   |
 
 The wallet object contains the following parameters:
 
@@ -457,7 +471,7 @@ The call *play* is used to instantly play a complete game round with a given bet
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/play/>53fdadc3499a9f85368b4567
+>     POST <https://api.whow.com/game_sessions/action/play/53fdadc3499a9f85368b4567>
 >
 > Payload
 >
@@ -469,17 +483,17 @@ The following objects will be within the payload object in the JSON response:
 
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
-| user     | Object   | {“wallet”: {“chips”:1250.00}}         | user object       |
+| user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
 | round    | Object   | {"steps":[{…}]}                       | game round object |
-| game     | Object   | {“settings”:{”bets”: [50, 100, 250]}} | game object       |
+| game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
 
 | **Name**      | **Type** | **Example Value**     | **Description**                                                       |
 |---------------|----------|-----------------------|-----------------------------------------------------------------------|
-| wallet        | Object   | {“chips”: 1250.00}    | wallet object                                                         |
+| wallet        | Object   | {"chips": 1250.00}    | wallet object                                                         |
 | level         | Integer  | 10                    | user level                                                            |
-| levelUp       | Object   | {“previousLevel”: 10} | level up object                                                       |
+| levelUp       | Object   | {"previousLevel": 10} | level up object                                                       |
 | levelProgress | Float    | 0.50                  | value between 0 and 1 on how far the user is away from the next level |
 
 The wallet object contains the following parameters:
@@ -494,31 +508,31 @@ The level up object contains the following parameters:
 |---------------|----------|--------------------|------------------------------------|
 | previousLevel | Integer  | 10                 | previous level before the level up |
 | newLevel      | Integer  | 11                 | new level after the level up       |
-| rewards       | Array    | [“games”, ”coins”] | array of awarded rewards (TBD)     |
+| rewards       | Array    | ["games", "coins"] | array of awarded rewards (TBD)     |
 
 The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{“type”:”play”}, {…}] | array of step objects                                                        |
-| status   | String       | closed                 | status of this game round; the status can be “open”, “closed” and “canceled” |
+| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
+| status   | String       | closed                 | status of this game round; the status can be "open", "closed" and "canceled" |
 
 The step object can contain the following parameters but doesn’t need to have them:
 
 | **Name**      | **Type** | **Example Value**  | **Description**                |
 |---------------|----------|--------------------|--------------------------------|
-| type          | String   | “play”             | type of the step               |
+| type          | String   | "play"             | type of the step               |
 | betAmount     | Float    | 1250               | bet amount of the step         |
 | virtualAmount | Float    | 0                  | virtual amount of the step     |
 | winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {“spinResult”:[…]} | tracked game data of this step |
+| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
 | timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
-| settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
+| settings     | Object   | {"bets": [50, 100, 250]} | settings object                                   |
 
 The game settings object contains the following parameters:
 
@@ -557,17 +571,17 @@ The call *bet* is used to bet on a game round. Important: If there is no round i
 |---------------|----------|---------------------|--------------------------------------------------------------------------------------------------------------------------|
 | betAmount     | Float    | 1250                | amount to bet in this round                                                                                              |
 | virtualAmount | Float    | 0                  | amount to bet in case of free spins; important: this parameter is optional and only used in special cases for freespins!         |
-| roundId       | String   | “ca5217a205e148ba…“ | round id to bet on; important: this parameter is optional! if it is not provided the backend will start a new game round |
+| roundId       | String   | "ca5217a205e148ba…" | round id to bet on; important: this parameter is optional! if it is not provided the backend will start a new game round |
 
 #### Example request
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/bet/>53fdadc3499a9f85368b4567
+>     POST <https://api.whow.com/game_sessions/action/bet/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
->     {"betAmount":1250,"roundId":”ca5217a205e148ba85f73bc37ad7e0a0”,"gameData":{"uid":100}}
+>     {"betAmount":1250,"roundId":"ca5217a205e148ba85f73bc37ad7e0a0","gameData":{"uid":100}}
 
 #### Response on success
 
@@ -575,17 +589,17 @@ The following objects will be within the payload object in the JSON response:
 
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
-| user     | Object   | {“wallet”: {“chips”:1250.00}}         | user object       |
+| user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
 | round    | Object   | {"steps":[{…}]}                       | game round object |
-| game     | Object   | {“settings”:{”bets”: [50, 100, 250]}} | game object       |
+| game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
 
 | **Name**      | **Type** | **Example Value**       | **Description**                                                       |
 |---------------|----------|-------------------------|-----------------------------------------------------------------------|
-| wallet        | Object   | {“chips”: 1250.00}      | wallet object                                                         |
+| wallet        | Object   | {"chips": 1250.00}      | wallet object                                                         |
 | level         | Integer  | 10                      | user level                                                            |
-| levelUp       | Object   | {“previous\_level”: 10} | level up object                                                       |
+| levelUp       | Object   | {"previous\_level": 10} | level up object                                                       |
 | levelProgress | Float    | 0.50                    | value between 0 and 1 on how far the user is away from the next level |
 
 The level up object contains the following parameters:
@@ -594,7 +608,7 @@ The level up object contains the following parameters:
 |---------------|----------|--------------------|------------------------------------|
 | previousLevel | Integer  | 10                 | previous level before the level up |
 | newLevel      | Integer  | 11                 | new level after the level up       |
-| rewards       | Array    | [“games”, ”coins”] | array of awarded rewards (TBD)     |
+| rewards       | Array    | ["games", "coins"] | array of awarded rewards (TBD)     |
 
 The wallet object contains the following parameters:
 
@@ -606,25 +620,25 @@ The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{“type”:”play”}, {…}] | array of step objects                                                        |
-| status   | String       | open                   | status of this game round; the status can be “open”, “closed” and “canceled” |
+| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
+| status   | String       | open                   | status of this game round; the status can be "open", "closed" and "canceled" |
 
 The step object can contain the following parameters but doesn’t need to have them:
 
 | **Name**      | **Type** | **Example Value**  | **Description**                |
 |---------------|----------|--------------------|--------------------------------|
-| type          | String   | “play”             | type of the step               |
+| type          | String   | "play"             | type of the step               |
 | betAmount     | Float    | 1250               | bet amount of the step         |
 | virtualAmount | Float    | 0                  | virtual amount of the step     |
 | winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {“spinResult”:[…]} | tracked game data of this step |
+| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
 | timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
-| settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
+| settings     | Object   | {"bets": [50, 100, 250]} | settings object                                   |
 
 The game settings object contains the following parameters:
 
@@ -664,18 +678,18 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 | **Name**  | **Type** | **Example Value**   | **Description**                                |
 |-----------|----------|---------------------|------------------------------------------------|
 | winAmount | Float    | 2500                | closing win amount for this round              |
-| gameData  | Object   | {“spinResult”:[…]}  | gameData the game wants to track to the casino |
-| roundId   | String   | “ca5217a205e148ba…“ | round id to close                              |
+| gameData  | Object   | {"spinResult":[…]}  | gameData the game wants to track to the casino |
+| roundId   | String   | "ca5217a205e148ba…" | round id to close                              |
 
 #### Example request
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/close/>53fdadc3499a9f85368b4567
+>     POST <https://api.whow.com/game_sessions/action/close/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
->     {"winAmount":2500,"roundId":”ca5217a205e148ba85f73bc37ad7e0a0”,"gameData":{"uid":100}}
+>     {"winAmount":2500,"roundId":"ca5217a205e148ba85f73bc37ad7e0a0","gameData":{"uid":100}}
 
 #### Response on success
 
@@ -683,15 +697,15 @@ The following objects will be within the payload object in the JSON response:
 
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
-| user     | Object   | {“wallet”: {“chips”:1250.00}}         | user object       |
+| user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
 | round    | Object   | {"steps":[{…}]}                       | game round object |
-| game     | Object   | {“settings”:{”bets”: [50, 100, 250]}} | game object       |
+| game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
 
 | **Name** | **Type** | **Example Value**  | **Description** |
 |----------|----------|--------------------|-----------------|
-| wallet   | Object   | {“chips”: 1250.00} | wallet object   |
+| wallet   | Object   | {"chips": 1250.00} | wallet object   |
 | level    | Integer  | 10                 | user level      |
 
 The wallet object contains the following parameters:
@@ -704,18 +718,18 @@ The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{“type”:”play”}, {…}] | array of step objects                                                        |
-| status   | String       | closed                 | status of this game round; the status can be “open”, “closed” and “canceled” |
+| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
+| status   | String       | closed                 | status of this game round; the status can be "open", "closed" and "canceled" |
 
 The step object can contain the following parameters but doesn’t need to have them:
 
 | **Name**      | **Type** | **Example Value**  | **Description**                |
 |---------------|----------|--------------------|--------------------------------|
-| type          | String   | “play”             | type of the step               |
+| type          | String   | "play"             | type of the step               |
 | betAmount     | Float    | 1250               | bet amount of the step         |
 | virtualAmount | Float    | 0                  | virtual amount of the step     |
 | winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {“spinResult”:[…]} | tracked game data of this step |
+| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
 | timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
 
 
@@ -723,7 +737,7 @@ The game object can contain the following parameters but doesn’t need to have 
 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
-| settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
+| settings     | Object   | {"bets": [50, 100, 250]} | settings object                                   |
 
 The game settings object contains the following parameters:
 
@@ -762,18 +776,18 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 >
 | **Name** | **Type** | **Example Value**   | **Description**                                |
 |----------|----------|---------------------|------------------------------------------------|
-| gameData | Object   | {“spinResult”:[…]}  | gameData the game wants to track to the casino |
-| roundId  | String   | “ca5217a205e148ba…“ | round id to close                              |
+| gameData | Object   | {"spinResult":[…]}  | gameData the game wants to track to the casino |
+| roundId  | String   | "ca5217a205e148ba…" | round id to close                              |
 
 #### Example request
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/cancel/>53fdadc3499a9f85368b4567
+>     POST <https://api.whow.com/game_sessions/action/cancel/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
->     {"roundId":”ca5217a205e148ba85f73bc37ad7e0a0”,"gameData":{"uid":100}}
+>     {"roundId":"ca5217a205e148ba85f73bc37ad7e0a0","gameData":{"uid":100}}
 
 #### Response on success
 
@@ -781,15 +795,15 @@ The following objects will be within the payload object in the JSON response:
 
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
-| user     | Object   | {“wallet”: {“chips”:1250.00}}         | user object       |
+| user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
 | round    | Object   | {"steps":[{…}]}                       | game round object |
-| game     | Object   | {“settings”:{”bets”: [50, 100, 250]}} | game object       |
+| game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
 
 | **Name** | **Type** | **Example Value**  | **Description** |
 |----------|----------|--------------------|-----------------|
-| wallet   | Object   | {“chips”: 1250.00} | wallet object   |
+| wallet   | Object   | {"chips": 1250.00} | wallet object   |
 | level    | Integer  | 10                 | user level      |
 
 The wallet object contains the following parameters:
@@ -802,25 +816,25 @@ The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{“type”:”play”}, {…}] | array of step objects                                                        |
-| status   | String       | canceled               | status of this game round; the status can be “open”, “closed” and “canceled” |
+| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
+| status   | String       | canceled               | status of this game round; the status can be "open", "closed" and "canceled" |
 
 The step object can contain the following parameters but doesn’t need to have them:
 
 | **Name**      | **Type** | **Example Value**  | **Description**                |
 |---------------|----------|--------------------|--------------------------------|
-| type          | String   | “play”             | type of the step               |
+| type          | String   | "play"             | type of the step               |
 | betAmount     | Float    | 1250               | bet amount of the step         |
 | virtualAmount | Float    | 0                  | virtual amount of the step     |
 | winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {“spinResult”:[…]} | tracked game data of this step |
+| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
 | timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
 | **Name**     | **Type** | **Example Value**        | **Description**                                   |
 |--------------|----------|--------------------------|---------------------------------------------------|
-| settings     | Object   | {“bets”: [50, 100, 250]} | settings object                                   |
+| settings     | Object   | {"bets": [50, 100, 250]} | settings object                                   |
 
 The game settings object contains the following parameters:
 
@@ -839,4 +853,49 @@ The game settings object contains the following parameters:
 | 400             | round id it not valid                               |
 | 400             | no valid entries for this round to cancel           |
 
+GameSessions::validateFreespins
+--------------------
 
+The call *validateFreespins* is used to validate freespins received within the [GameSessions::get](#gamesessionsget) call. The validation is done by providing the ids from the freespin objects.
+
+#### HTTP Method
+
+>POST
+
+#### URL
+
+><https://api.whow.com/game\_sessions/action/validateFreespins/{:token}>
+
+The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
+
+#### Payload
+
+>The following payload parameters are required:
+>
+| **Name** | **Type** | **Example Value**   | **Description**                                |
+|----------|----------|---------------------|------------------------------------------------|
+| ids | Array | ["ca5217a205e148ba85f73bc37ad7e0a0"]  | freespin ids to validate |
+
+#### Example request
+
+>URL
+>
+>     POST <https://api.whow.com/game_sessions/action/validateFreespins/53fdadc3499a9f85368b4567>
+>
+>Payload
+>
+>     {"ids":["ca5217a205e148ba85f73bc37ad7e0a0"]}
+
+#### Response on success
+
+The following objects will be within the payload object in the JSON response:
+
+| **Name** | **Type** | **Example Value**                     | **Description**   |
+|----------|----------|---------------------------------------|-------------------|
+| validIds | Array | ["ca5217a205e148ba85f73bc37ad7e0a0"] | list of valid and validated ids |
+
+#### Response on failure
+
+| **Status code** | **Description**                                     |
+|-----------------|-----------------------------------------------------|
+| 400             | token seems to be corrupt please request a new one |
