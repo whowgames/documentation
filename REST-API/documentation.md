@@ -71,11 +71,11 @@ All calls besides REST resources will be accessible via the POST method.
 
 URIs for REST resources have the following structure:
 
-><https://api.whow.com/resource/>
+><https://api.jackpot.de/resource/>
 
 URIs for non-REST resources have the following structure:
 
-><https://api.whow.com/resource/action/method>
+><https://api.jackpot.de/resource/action/method>
 
 The exact URIs for each call can be found within this documentation.
 
@@ -88,9 +88,9 @@ In order to access the Whow REST API you need to authenticate yourself for each 
 
 The next steps will guide you through the process of creating the authorization header. To give you an idea of a sample request without any authorization header consider the following example of how an user update request might look like.
 
->PUT [https://api.whow.com/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.whow.com/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)  
+>PUT [https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)  
 
->Host: api.whow.com  
+>Host: api.jackpot.de  
 Content-Type: application/json; charset=utf-8  
 X-whow-date: 20140828T163000Z  
 
@@ -98,10 +98,10 @@ X-whow-date: 20140828T163000Z
 
 After you have created a signature for this call it might look like this.
 
->PUT [https://api.whow.com/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.whow.com/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)  
+>PUT [https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)  
 
 >Authorization: SHA256 Credential=ef9f237e8aaec2893b6b2121, SignedHeaders=content-type;host;x-whow-date, Signature=7921c3698fb7f40ed9cea807c1dc135e2739c4d5c56bd6a7e090bec4eee7f5c4  
-Host: api.whow.com  
+Host: api.jackpot.de  
 Content-Type: application/json; charset=utf-8  
 X-whow-date: 20140828T163000Z
 
@@ -134,7 +134,7 @@ To create a canonical request, concatenate the following components from each st
 
 3.  Add the canonical headers followed by a newline character. The canonical headers consist of a list of HTTP headers that are included in the request to the Whow REST API. You can include whatever headers you want in here as long as they are sent as real headers in the request as well. Make sure that all headers are sorted alphabetically. All header names (the part in front of the colon) must be lowercase and without leading or trailing whitespaces. The value for each header must be without leading and trailing whitespaces as well. After each header line there is a newline character.
     >content-type:application/json; charset=utf-8\\n  
-    host:api.whow.com\\n  
+    host:api.jackpot.de\\n  
     x-whow-date:20140828T163000Z\\n  
     \\n
 
@@ -153,7 +153,7 @@ To create a canonical request, concatenate the following components from each st
     >POST\\n  
     /users/ef9f237e8aaec2893b6b2121\\n  
     content-type:application/json; charset=utf-8\\n  
-    host:api.whow.com\\n  
+    host:api.jackpot.de\\n  
     x-whow-date:20140828T163000Z\\n  
     \\n  
     content-type;host;x-whow-date\\n  
@@ -306,7 +306,7 @@ In case you are using the freespin object, which is part of the game object, to 
 
 #### URL
 
-><https://api.whow.com/game\_sessions/action/get/{:token}>
+><https://api.jackpot.de/game\_sessions/action/get/{:token}>
 
 >The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -319,7 +319,7 @@ In case you are using the freespin object, which is part of the game object, to 
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/get/53fdadc3499a9f85368b4567>
+>     POST <https://api.jackpot.de/game_sessions/action/get/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
@@ -394,7 +394,7 @@ The call *wallet* is used to request the current user wallet with all available 
 
 #### URL
 
-><https://api.whow.com/game\_sessions/action/wallet/{:token}>
+><https://api.jackpot.de/game\_sessions/action/wallet/{:token}>
 
 >The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -408,7 +408,7 @@ The call *wallet* is used to request the current user wallet with all available 
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/wallet/53fdadc3499a9f85368b4567>
+>     POST <https://api.jackpot.de/game_sessions/action/wallet/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
@@ -451,7 +451,7 @@ The call *play* is used to instantly play a complete game round with a given bet
 
 #### URL
 
-><https://api.whow.com/game\_sessions/action/play/{:token}>
+><https://api.jackpot.de/game\_sessions/action/play/{:token}>
 
 >The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -471,7 +471,7 @@ The call *play* is used to instantly play a complete game round with a given bet
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/play/53fdadc3499a9f85368b4567>
+>     POST <https://api.jackpot.de/game_sessions/action/play/53fdadc3499a9f85368b4567>
 >
 > Payload
 >
@@ -559,7 +559,7 @@ The call *bet* is used to bet on a game round. Important: If there is no round i
 
 #### URL
 
-><https://api.whow.com/game\_sessions/action/bet/{:token}>
+><https://api.jackpot.de/game\_sessions/action/bet/{:token}>
 
 >The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -577,7 +577,7 @@ The call *bet* is used to bet on a game round. Important: If there is no round i
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/bet/53fdadc3499a9f85368b4567>
+>     POST <https://api.jackpot.de/game_sessions/action/bet/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
@@ -667,7 +667,7 @@ The call *close* is used to close a game round and determine the winnings of a u
 
 #### URL
 
-><https://api.whow.com/game\_sessions/action/close/{:token}>
+><https://api.jackpot.de/game\_sessions/action/close/{:token}>
 
 The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -685,7 +685,7 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/close/53fdadc3499a9f85368b4567>
+>     POST <https://api.jackpot.de/game_sessions/action/close/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
@@ -766,7 +766,7 @@ The call *cancel* is used to cancel a game round and return the bets to the user
 
 #### URL
 
-><https://api.whow.com/game\_sessions/action/close/{:token}>
+><https://api.jackpot.de/game\_sessions/action/close/{:token}>
 
 The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -783,7 +783,7 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/cancel/53fdadc3499a9f85368b4567>
+>     POST <https://api.jackpot.de/game_sessions/action/cancel/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
@@ -864,7 +864,7 @@ The call *validateFreespins* is used to validate freespins received within the [
 
 #### URL
 
-><https://api.whow.com/game\_sessions/action/validateFreespins/{:token}>
+><https://api.jackpot.de/game\_sessions/action/validateFreespins/{:token}>
 
 The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -880,7 +880,7 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 
 >URL
 >
->     POST <https://api.whow.com/game_sessions/action/validateFreespins/53fdadc3499a9f85368b4567>
+>     POST <https://api.jackpot.de/game_sessions/action/validateFreespins/53fdadc3499a9f85368b4567>
 >
 >Payload
 >
