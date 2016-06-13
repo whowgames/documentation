@@ -19,7 +19,7 @@ Table of Contents
     - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)  
 
 - [Calls](#calls)  
-    - [Resource: GameSessions](#resource-gamesessions)  
+    - [GameSessions](#resource-gamesessions)
         - [GameSessions::get](#gamesessionsget)  
         - [GameSessions::wallet](#gamesessionswallet)  
         - [GameSessions::play](#gamesessionsplay)  
@@ -27,6 +27,7 @@ Table of Contents
         - [GameSessions::close](#gamesessionsclose)  
         - [GameSessions::cancel](#gamesessionscancel)
         - [GameSessions::validateFreespins](#gamesessionsvalidatefreespins)
+    - [Events](#resource-events)
 
 Revision History
 ================
@@ -288,8 +289,8 @@ Resulting from this you want to check the payload after each and every request a
    }  
 }  
 
-Resource: GameSessions
-----------------------
+GameSessions
+------------
 
 GameSessions::get
 -----------------
@@ -357,7 +358,7 @@ The game object contains the following parameters:
 | **Name** | **Type** | **Example Value**        | **Description**      |
 |----------|----------|--------------------------|----------------------|
 | settings | Object   | {"bets": [50, 100, 250]} | game settings object |
-| freespins | Object Array | [{"id": "53f...", "amount": 12, "betAmount": 1250.00}] | freespins obviouslyject |
+| freespins | Object Array | [{"id": "53f...", "amount": 12, "betAmount": 1250.00}] | freespins object |
 
 The game settings object contains the following parameters:
 
@@ -898,4 +899,67 @@ The following objects will be within the payload object in the JSON response:
 
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
+| 400             | token seems to be corrupt please request a new one  |
+
+Events
+------
+Events::trigger
+--------------------
+
+The call *trigger* is used to trigger events based on an event type and additional event data, depending on the event type. Further details regarding events can be found within the [events.md](https://github.com/whowgames/documentation/blob/master/REST-API/events.md) document, which is located in our document repository on github.com.
+
+Since the events parameter is an array you can publish multiple events at the same time.
+
+#### HTTP Method
+
+>POST
+
+#### URL
+
+><https://api.jackpot.de/events/action/trigger/{:token}>
+
+The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
+
+#### Payload
+
+>The following payload parameters are required:
+>
+| **Name** | **Type** | **Example Value**   | **Description**                                |
+|----------|----------|---------------------|------------------------------------------------|
+| events | Object Array | [{"type":"big_win","value":1250000}] | array of event objects - see below |
+
+The event object should contain the following parameters:
+
+| **Name** | **Type** | **Example Value**        | **Description**      |
+|----------|----------|--------------------------|----------------------|
+| type | String | "win"  | event type taken from the *events.md* document |
+| value | String or Float(19,4) or Boolean | 1250000  | value for the given event type |
+
+Additional to these two mandatory parameters each event can contain additional paramters which are described within the *events.md* document. Make sure to include all mandatory parameters for each event.
+
+#### Example request
+
+>URL
+>
+>     POST <https://api.jackpot.de/events/action/trigger/53fdadc3499a9f85368b4567>
+>
+>Payload
+>
+>     {"events":[{"type":"big_win","value":1250000}]}
+
+#### Response on success
+
+The following objects will be within the payload object in the JSON response:
+
+| **Name** | **Type** | **Example Value**                     | **Description**   |
+|----------|----------|---------------------------------------|-------------------|
+| success | Boolean | true | true on success |
+
+#### Response on failure
+
+| **Status code** | **Description**                                     |
+|-----------------|-----------------------------------------------------|
 | 400             | token seems to be corrupt please request a new one |
+| 401             | unknown event type |
+| 402             | missing paramter for given event type |
+
