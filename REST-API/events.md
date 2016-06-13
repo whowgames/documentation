@@ -9,7 +9,7 @@ Table of Contents
 - [Introduction](#introduction)
 - [Events](#events)
 	- [Type: win](#typewin)
-	- [Type: scatter](#typewin)
+	- [Type: scatters](#typescatters)
 
 Revision History
 ================
