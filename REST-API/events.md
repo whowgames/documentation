@@ -10,6 +10,11 @@ Table of Contents
 - [Events](#events)
 	- [Type: win](#typewin)
 	- [Type: scatters](#typescatters)
+	- [Type: freespins](#typefreespins)
+	- [Type: betSizeChange](#typebetsizechange)
+	- [Type: lineNumberChange](#typelinenumberchange)	- [Type: autoSpin](#typeautospin)
+	- [Type: fastSpin](#typefastspin)
+	- [Type: maxiPlay](#typemaxiplay)
 
 Revision History
 ================
@@ -64,5 +69,77 @@ Type: scatters
 
 The positions array describes where on the reels the scatters are placed. Reels without scatter symbols are represented by an empty array "[]". Reels are always represented from left to right and top to bottom. Scatter positions always start with 0. In the example there are two scatters on the first and second position on the second reel and one scatter each on reel four, second from top, and five, third from top.
 
+Type: freespins
+---------------
 
+*freespins* is used whenever the user has won freespins within the game.
 
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "freespins" | event type | **YES** |
+| value    | Integer | 10 | amount of freespins gained | **YES** |
+| betAmount | Integer | 12500 | bet amount with which the freespins are played | **YES** |
+| inFreespins | Boolean | false | freespins won while playing freespins - defaults to false | **NO** |
+
+Type: betSizeChange
+-------------------
+
+*betSizeChange* is used whenever the user changes the bet size within the game.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "betSizeChange" | event type | **YES** |
+| value    | Float(19.4) | 12500 | new bet size | **YES** |
+
+Type: lineNumberChange
+----------------
+
+*lineNumberChange* is used whenever the user changes the number of lines he's betting on within the game.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "lineNumberChange" | event type | **YES** |
+| value    | Integer | 25 | new line number | **YES** |
+
+Type: autoSpin
+----------------
+
+*autoSpin* is used whenever the user toggles between auto spin on/off within the game.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "autoSpin" | event type | **YES** |
+| value    | Boolean | true | auto spin on or off | **YES** |
+
+Type: fastSpin
+----------------
+
+*fastSpin* is used whenever the user toggles between fast spin on/off within the game.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "fastSpin" | event type | **YES** |
+| value    | Boolean | true | fast spin on or off | **YES** |
+
+Type: maxiPlay
+----------------
+
+*maxiPlay* is used whenever the user toggles between maxi play on/off within the game.
+This event refers to a special game mode from Gamomat games.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "maxiPlay" | event type | **YES** |
+| value    | Boolean | true | maxi play on or off | **YES** |
