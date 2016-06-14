@@ -12,7 +12,8 @@ Table of Contents
 	- [Type: scatters](#typescatters)
 	- [Type: freespins](#typefreespins)
 	- [Type: betSizeChange](#typebetsizechange)
-	- [Type: lineNumberChange](#typelinenumberchange)	- [Type: autoSpin](#typeautospin)
+	- [Type: lineNumberChange](#typelinenumberchange)
+	- [Type: autoSpin](#typeautospin)
 	- [Type: fastSpin](#typefastspin)
 	- [Type: maxiPlay](#typemaxiplay)
 
