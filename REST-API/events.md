@@ -8,14 +8,14 @@ Table of Contents
 - [Copyright](#copyright)
 - [Introduction](#introduction)
 - [Events](#events)
-	- [Type: win](#typewin)
-	- [Type: scatters](#typescatters)
-	- [Type: freespins](#typefreespins)
-	- [Type: betSizeChange](#typebetsizechange)
-	- [Type: lineNumberChange](#typelinenumberchange)
-	- [Type: autoSpin](#typeautospin)
-	- [Type: fastSpin](#typefastspin)
-	- [Type: maxiPlay](#typemaxiplay)
+	- [Type: win](#type-win)
+	- [Type: scatters](#type-scatters)
+	- [Type: freespins](#type-freespins)
+	- [Type: betSizeChange](#type-betsizechange)
+	- [Type: lineNumberChange](#type-linenumberchange)
+	- [Type: autoSpin](#type-autospin)
+	- [Type: fastSpin](#type-fastspin)
+	- [Type: maxiPlay](#type-maxiplay)
 
 Revision History
 ================
