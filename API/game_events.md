@@ -1,4 +1,4 @@
-**REST API Events**
+**Whow API Game Events**
 
 Table of Contents
 =================
@@ -32,12 +32,12 @@ Copyright © 2016 Whow Games GmbH. All rights reserved.
 Introduction
 ============
 
-This document serves as an explanation of different event types and when and how to use them. In case you are looking for a way to trigger events you can find the call documentation within the REST API [documentation.md](https://github.com/whowgames/documentation/blob/master/REST-API/documentation.md) file stored in our documentation repository on github.com.
+This document serves as an explanation of different event types and when and how to use them. In case you are looking for a way to trigger events you can find the call documentation within the Whow API [documentation.md](https://github.com/whowgames/documentation/blob/master/API/documentation.md) document stored in our documentation repository on github.com.
 
-Events
+GameEvents
 ======
 
-Events are used to publish specific game events to the casino so the casino can notify the user in special cases or use the received event data for statistic purposes. Each event has a specific type which makes them distinguishable from each other.
+GameEvents are used to publish specific events to the casino so the casino can notify the user in special cases or use the received event data for statistic purposes. Each event has a specific type which makes them distinguishable from each other.
 
 All events **must have** the paramter *type* and *value*. Additional to these two mandatory parameters events sometimes define additional paramters which might be mandatory as well. So read the documentation for each event carefully.
 
