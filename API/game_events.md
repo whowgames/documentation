@@ -65,6 +65,7 @@ Type: scatters
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
 | type     | String   | "scatters" | event type | **YES** |
+| symbol     | Integer   | 4 | id of the scatter symbol | **YES** |
 | positions | Array |[[],[0,1],[],[1],[2]] | position of scatters on the reels | **YES** |
 | value    | Float(19.4) | 1250000 | win amount of scatter symbols | **YES** |
 
