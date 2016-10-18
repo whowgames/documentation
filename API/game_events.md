@@ -11,7 +11,7 @@ Table of Contents
 	- [Type: win](#type-win)
 	- [Type: scatters](#type-scatters)
 	- [Type: freespins](#type-freespins)
-	- [Type: casinoFreespins](#type-casinoFreespins)
+	- [Type: casinoFreespins](#type-casinofreespins)
 	- [Type: betSizeChange](#type-betsizechange)
 	- [Type: lineNumberChange](#type-linenumberchange)
 	- [Type: autoSpin](#type-autospin)
