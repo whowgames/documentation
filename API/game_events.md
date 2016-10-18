@@ -88,7 +88,7 @@ Type: freespins
 | inFreespins | Boolean | false | freespins won while playing freespins - defaults to false | **NO** |
 
 Type: casinoFreespins
----------------
+---------------------
 
 *casinoFreespins* is used whenever the game triggers freespins which the game received on GameSessions::get
 
