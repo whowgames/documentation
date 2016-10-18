@@ -7,16 +7,9 @@ Table of Contents
 - [Revision History](#revision-history)
 - [Copyright](#copyright)
 - [Introduction](#introduction)
-- [Events](#events)
-	- [Type: win](#type-win)
-	- [Type: scatters](#type-scatters)
-	- [Type: freespins](#type-freespins)
-	- [Type: casinoFreespins](#type-casinoFreespins)
-	- [Type: betSizeChange](#type-betsizechange)
-	- [Type: lineNumberChange](#type-linenumberchange)
-	- [Type: autoSpin](#type-autospin)
-	- [Type: fastSpin](#type-fastspin)
-	- [Type: maxiPlay](#type-maxiplay)
+- [X-Domain Events](#x-domain-events)
+	- [Type: startCasinoFreespins](#type-startCasinoFreespins)
+	- [Type: getGameSession](#type-getGameSession)
 
 Revision History
 ================
@@ -54,7 +47,7 @@ Type: startCasinoFreespins
 | type     | String   | "startCasinoFreespins" | event type | **YES** |
 | payload  | Object   | {} | empty payload | **YES** |
 
-Type: scatters
+Type: getGameSession
 ---------
 
 *getGameSession* is used whenever the game should perform [GameSessions::get](https://github.com/whowgames/documentation/blob/master/API/documentation.md#gamesessionsget) again.
