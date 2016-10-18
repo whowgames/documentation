@@ -11,6 +11,7 @@ Table of Contents
 	- [Type: win](#type-win)
 	- [Type: scatters](#type-scatters)
 	- [Type: freespins](#type-freespins)
+	- [Type: casinoFreespins](#type-casinoFreespins)
 	- [Type: betSizeChange](#type-betsizechange)
 	- [Type: lineNumberChange](#type-linenumberchange)
 	- [Type: autoSpin](#type-autospin)
@@ -23,6 +24,7 @@ Revision History
 | **Version** | **Date**   | **Changes**                                        | **Name**  | **Approved** |
 |-------------|------------|----------------------------------------------------|-----------|--------------|
 | 0.1.0       | 13.06.2016 | Initial version                                    | fschemmer | -            |
+| 0.1.1       | 18.10.2016 | Added casinoFreespins                              | fschemmer | -            |
 
 Copyright
 =========
@@ -84,6 +86,19 @@ Type: freespins
 | value    | Integer | 10 | amount of freespins gained | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the freespins are played | **YES** |
 | inFreespins | Boolean | false | freespins won while playing freespins - defaults to false | **NO** |
+
+Type: casinoFreespins
+---------------
+
+*casinoFreespins* is used whenever the game triggers freespins which the game received on GameSessions::get
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "casinoFreespins" | event type | **YES** |
+| value    | Integer | 10 | amount of freespins gained | **YES** |
+| betAmount | Integer | 12500 | bet amount with which the freespins are played | **YES** |
 
 Type: betSizeChange
 -------------------
