@@ -42,6 +42,7 @@ Revision History
 | 1.1         | 16.02.2015 | Update document from .docX -> .md, various updates & fixes, added "Best Practices" section | fschemmer | -           
 | 1.2         | 23.05.2016 | Updated copyright, added freespins with fixed bet amount | fschemmer | - |
 | 1.3         | 16.06.2016 | Added GameEvents namespace and removed REST support | fschemmer | - |
+| 1.3.1         | 14.11.2016 | Added birthday to GameSessions::get | fschemmer | - |
 
 Copyright
 =========
@@ -334,6 +335,7 @@ The user object contains the following parameters:
 | id            | String     | "53fc9eb31b4d5eef118b4569" | id of the user                                            |
 | name          | String     | "john\_doe"                | name of the user                                          |
 | locale        | Char(5)    | "de\_DE"                   | locale of the user                                        |
+| birthday      | Char(8)    | "26-04-1993"                   | birthday of the user; default after signup `1-1-1970`                                        |
 | gender        | String     | "male"                     | gender of the user                                        |
 | wallet        | Object     | {"chips": 1250.00}         | wallet object                                             |
 | level         | Integer    | 100                        | level of the user                                         |
