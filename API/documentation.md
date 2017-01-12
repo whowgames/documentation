@@ -86,7 +86,7 @@ The next steps will guide you through the process of creating the authorization 
 
 >Host: api.jackpot.de  
 Content-Type: application/json; charset=utf-8  
-X-whow-date: 20140828T163000Z  
+X-whow-date: 20140828t163000z  
 
 >{"name":"John Doe"}
 
@@ -97,7 +97,7 @@ After you have created a signature for this call it might look like this.
 >Authorization: SHA256 Credential=ef9f237e8aaec2893b6b2121, SignedHeaders=content-type;host;x-whow-date, Signature=7921c3698fb7f40ed9cea807c1dc135e2739c4d5c56bd6a7e090bec4eee7f5c4  
 Host: api.jackpot.de  
 Content-Type: application/json; charset=utf-8  
-X-whow-date: 20140828T163000Z
+X-whow-date: 20140828t163000z
 
 >{"name":"John Doe"}
 
@@ -129,7 +129,7 @@ To create a canonical request, concatenate the following components from each st
 3.  Add the canonical headers followed by a newline character. The canonical headers consist of a list of HTTP headers that are included in the request to the Whow API. You can include whatever headers you want in here as long as they are sent as real headers in the request as well. Make sure that all headers are sorted alphabetically. All header names (the part in front of the colon) must be lowercase and without leading or trailing whitespaces. The value for each header must be without leading and trailing whitespaces as well. After each header line there is a newline character.
     >content-type:application/json; charset=utf-8\\n  
     host:api.jackpot.de\\n  
-    x-whow-date:20140828T163000Z\\n  
+    x-whow-date:20140828t163000z\\n  
     \\n
 
 4.  Add the signed headers followed by a newline character. This value is a list of the names of the headers that were included as canonical headers in step 3. Each header that is specified here must be in the real request and in the canonical headers as well. Make sure that each header name is lowercase and that all header names are sorted alphabetically. All header names are then concatenated into a string separating each header with a semi colon.
@@ -141,21 +141,21 @@ To create a canonical request, concatenate the following components from each st
     >     {"name":"John Doe"}  
     >Hashed payload:
     >
-    >     d360d2dd3b386b4e64fbc4791e14b48ed4c71c07247b25255baf532d34f424fa
+    >     f9302c25f1b5941903d562d3fc43dfb0e814c65bf6f63ba5baa0a758d34982d3
 
 6.  To construct the finished canonical request combine all the components from each steps as a single string. As already mentioned each component must end with a newline character. The resulting canonical request should look like this.
     >POST\\n  
     /users/ef9f237e8aaec2893b6b2121\\n  
     content-type:application/json; charset=utf-8\\n  
     host:api.jackpot.de\\n  
-    x-whow-date:20140828T163000Z\\n  
+    x-whow-date:20140828t163000z\\n  
     \\n  
     content-type;host;x-whow-date\\n  
-    d360d2dd3b386b4e64fbc4791e14b48ed4c71c07247b25255baf532d34f424fa  
+    f9302c25f1b5941903d562d3fc43dfb0e814c65bf6f63ba5baa0a758d34982d3  
 
 7.  Create a hash of the canonical request by using the same algorithm you already used to hash the payload. The hashed canonical request must be represented as a string of lowercase hexadecimal characters.
     The resulting hashed canonical request should look like this. You will use this value again in later stages of the signing process.
-    >db56f38c510dabcd8efb01a6ae3f5e46b71355263f365db35e933db0e1f09fd5
+    >8ea0ab5b0cb5f65af16bc01340e2129ba426b350852237c54a3f66821b1166cf
 
 Create a String to Sign
 -----------------------
@@ -175,12 +175,12 @@ Pseudocode of a *string to sign* string:
     >20140828T163000Z\\n
 
 3.  Append the hash of the canonical request that you created in the step before.
-    >db56f38c510dabcd8efb01a6ae3f5e46b71355263f365db35e933db0e1f09fd5
+    >8ea0ab5b0cb5f65af16bc01340e2129ba426b350852237c54a3f66821b1166cf
 
 The end result of this process should look like this then:
 > SHA256\\n  
 > 20140828T163000Z\\n  
-> db56f38c510dabcd8efb01a6ae3f5e46b71355263f365db35e933db0e1f09fd5
+> 8ea0ab5b0cb5f65af16bc01340e2129ba426b350852237c54a3f66821b1166cf
 
 Calculate the Signature
 -----------------------
