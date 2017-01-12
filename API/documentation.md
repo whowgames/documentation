@@ -86,7 +86,7 @@ The next steps will guide you through the process of creating the authorization 
 
 >Host: api.jackpot.de  
 Content-Type: application/json; charset=utf-8  
-X-whow-date: 20140828t163000z  
+X-whow-date: 20140828T163000Z  
 
 >{"name":"John Doe"}
 
@@ -97,7 +97,7 @@ After you have created a signature for this call it might look like this.
 >Authorization: SHA256 Credential=ef9f237e8aaec2893b6b2121, SignedHeaders=content-type;host;x-whow-date, Signature=7921c3698fb7f40ed9cea807c1dc135e2739c4d5c56bd6a7e090bec4eee7f5c4  
 Host: api.jackpot.de  
 Content-Type: application/json; charset=utf-8  
-X-whow-date: 20140828t163000z
+X-whow-date: 20140828T163000Z
 
 >{"name":"John Doe"}
 
