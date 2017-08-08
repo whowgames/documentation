@@ -43,11 +43,12 @@ Revision History
 | 1.2         | 23.05.2016 | Updated copyright, added freespins with fixed bet amount | fschemmer | - |
 | 1.3         | 16.06.2016 | Added GameEvents namespace and removed REST support | fschemmer | - |
 | 1.3.1         | 14.11.2016 | Added birthday to GameSessions::get | fschemmer | - |
+| 1.3.2         | 08.08.2017 | Removed deprecated steps object | mkercmar | - |
 
 Copyright
 =========
 
-Copyright © 2014 - 2016 Whow Games GmbH. All rights reserved.
+Copyright © 2014 - 2017 Whow Games GmbH. All rights reserved.
 
 Introduction
 ============
@@ -479,7 +480,7 @@ The following objects will be within the payload object in the JSON response:
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
 | user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
-| round    | Object   | {"steps":[{…}]}                       | game round object |
+| round    | Object   | {"id":[{…}]…}                         | game round object |
 | game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
@@ -509,19 +510,10 @@ The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
-| status   | String       | closed                 | status of this game round; the status can be "open", "closed" and "canceled" |
-
-The step object can contain the following parameters but doesn’t need to have them:
-
-| **Name**      | **Type** | **Example Value**  | **Description**                |
-|---------------|----------|--------------------|--------------------------------|
-| type          | String   | "play"             | type of the step               |
-| betAmount     | Float    | 1250               | bet amount of the step         |
-| virtualAmount | Float    | 0                  | virtual amount of the step     |
-| winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
-| timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
+| id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
+| betAmount | Integer     | 6250                   | total bet amount of round |
+| winAmount | Integer     | 2000                   | total win amount of round |
+| timestamp | Object      | {"sec":1502200341,"usec":255000}} | timestamp of last change |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
@@ -585,7 +577,7 @@ The following objects will be within the payload object in the JSON response:
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
 | user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
-| round    | Object   | {"steps":[{…}]}                       | game round object |
+| round    | Object   | {"id":[{…}]…}                         | game round object |
 | game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
@@ -615,19 +607,10 @@ The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
-| status   | String       | open                   | status of this game round; the status can be "open", "closed" and "canceled" |
-
-The step object can contain the following parameters but doesn’t need to have them:
-
-| **Name**      | **Type** | **Example Value**  | **Description**                |
-|---------------|----------|--------------------|--------------------------------|
-| type          | String   | "play"             | type of the step               |
-| betAmount     | Float    | 1250               | bet amount of the step         |
-| virtualAmount | Float    | 0                  | virtual amount of the step     |
-| winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
-| timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
+| id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
+| betAmount | Integer     | 6250                   | total bet amount of round |
+| winAmount | Integer     | 0                      | total win amount of round |
+| timestamp | Object      | {"sec":1502200341,"usec":255000}} | timestamp of last change |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
@@ -693,7 +676,7 @@ The following objects will be within the payload object in the JSON response:
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
 | user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
-| round    | Object   | {"steps":[{…}]}                       | game round object |
+| round    | Object   | {"id":[{…}]…}                         | game round object |
 | game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
@@ -713,20 +696,10 @@ The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
-| status   | String       | closed                 | status of this game round; the status can be "open", "closed" and "canceled" |
-
-The step object can contain the following parameters but doesn’t need to have them:
-
-| **Name**      | **Type** | **Example Value**  | **Description**                |
-|---------------|----------|--------------------|--------------------------------|
-| type          | String   | "play"             | type of the step               |
-| betAmount     | Float    | 1250               | bet amount of the step         |
-| virtualAmount | Float    | 0                  | virtual amount of the step     |
-| winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
-| timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
-
+| id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
+| betAmount | Integer     | 6250                   | total bet amount of round |
+| winAmount | Integer     | 2000                   | total win amount of round |
+| timestamp | Object      | {"sec":1502200341,"usec":255000}} | timestamp of last change |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
@@ -791,7 +764,7 @@ The following objects will be within the payload object in the JSON response:
 | **Name** | **Type** | **Example Value**                     | **Description**   |
 |----------|----------|---------------------------------------|-------------------|
 | user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
-| round    | Object   | {"steps":[{…}]}                       | game round object |
+| round    | Object   | {"id":[{…}]…}                         | game round object |
 | game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
 
 The user object can contain the following parameters but doesn’t need to have them:
@@ -811,19 +784,10 @@ The game round object contains the following parameters:
 
 | **Name** | **Type**     | **Example Value**      | **Description**                                                              |
 |----------|--------------|------------------------|------------------------------------------------------------------------------|
-| steps    | Object Array | [{"type":"play"}, {…}] | array of step objects                                                        |
-| status   | String       | canceled               | status of this game round; the status can be "open", "closed" and "canceled" |
-
-The step object can contain the following parameters but doesn’t need to have them:
-
-| **Name**      | **Type** | **Example Value**  | **Description**                |
-|---------------|----------|--------------------|--------------------------------|
-| type          | String   | "play"             | type of the step               |
-| betAmount     | Float    | 1250               | bet amount of the step         |
-| virtualAmount | Float    | 0                  | virtual amount of the step     |
-| winAmount     | Float    | 0                  | win amount of the step         |
-| gameData      | Object   | {"spinResult":[…]} | tracked game data of this step |
-| timestamp     | Integer  | 1234567890         | unix timestamp of this step    |
+| id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
+| betAmount | Integer     | 6250                   | total bet amount of round |
+| winAmount | Integer     | 2000                   | total win amount of round |
+| timestamp | Object      | {"sec":1502200341,"usec":255000}} | timestamp of last change |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
