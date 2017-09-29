@@ -64,17 +64,6 @@ The Whow API is based on open standards, such as JSON, so you can use any langua
 
 It is crucial that all of your requests to the Whow API are sent from a server. If you send requests from a client your key pair can be hijacked and used to manipulate critical user data. More on this topic can be found within the Authentication chapter in this documentation.
 
-Structure of URIs
-=================
-
-Your application will access the Whow API via HTTP(s) requests. All requests made to the Whow API and from the Whow API must be JSON encoded and made via POST.
-
-URIs will have the following structure:
-
-><https://api.jackpot.de/namespace/action/method>
-
-The exact URIs for each call can be found within this documentation.
-
 Additional Parameters
 =================
 
@@ -87,6 +76,17 @@ We're adding additional parameters to your launch url. Please use them to set th
 |----------|----------|--------------------------------------|
 | sound     | 0\|1   | Enable the Sound 0 = sound off, 1 = sound on   |
 | animation     | 0\|1\|2   | Show all (2), some (1) or no (0) animations |
+
+Structure of URIs
+=================
+
+Your application will access the Whow API via HTTP(s) requests. All requests made to the Whow API and from the Whow API must be JSON encoded and made via POST.
+
+URIs will have the following structure:
+
+><https://api.jackpot.de/namespace/action/method>
+
+The exact URIs for each call can be found within this documentation.
 
 Authentication
 ==============
