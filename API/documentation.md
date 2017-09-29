@@ -78,7 +78,7 @@ The exact URIs for each call can be found within this documentation.
 Additional Parameters
 =================
 
-We're adding additional parameters to your launch url. Please use them to set the initital game settins.
+We're adding additional parameters to your launch url. Please use them to set the initital game settings.
 
 
 | **Name** | **Possible Values** | **Description**                    |
