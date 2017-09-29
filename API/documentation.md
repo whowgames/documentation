@@ -8,6 +8,7 @@ Table of Contents
 - [Copyright](#copyright)
 - [Introduction](#introduction)
 - [Getting started](#getting-started)
+- [Additional Parameters](#additional-parameters)
 - [Structure of URIs](#structure-of-uris)
 - [Authentication](#authentication)
     - [Create a canonical request](#create-a-canonical-request)
@@ -73,6 +74,17 @@ URIs will have the following structure:
 ><https://api.jackpot.de/namespace/action/method>
 
 The exact URIs for each call can be found within this documentation.
+
+Additional Parameters
+=================
+
+We're adding additional parameters to your launch url. Please use them to set the initital game settins.
+
+
+| **Name** | **Possible Values** | **Description**                    |
+|----------|----------|--------------------------------------|
+| sound     | 0\|1   | Enable the Sound 0 = sound off, 1 = sound on   |
+| animation     | 0\|1\|2   | Show all (2), some (1) or no (0_ animations |
 
 Authentication
 ==============
