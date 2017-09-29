@@ -84,7 +84,7 @@ We're adding additional parameters to your launch url. Please use them to set th
 | **Name** | **Possible Values** | **Description**                    |
 |----------|----------|--------------------------------------|
 | sound     | 0\|1   | Enable the Sound 0 = sound off, 1 = sound on   |
-| animation     | 0\|1\|2   | Show all (2), some (1) or no (0_ animations |
+| animation     | 0\|1\|2   | Show all (2), some (1) or no (0) animations |
 
 Authentication
 ==============
