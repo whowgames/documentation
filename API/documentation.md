@@ -80,6 +80,8 @@ Additional Parameters
 
 We're adding additional parameters to your launch url. Please use them to set the initital game settings.
 
+> Notice: we're taking care about reloading your game, when the user changes on of those inside our settings panel
+
 
 | **Name** | **Possible Values** | **Description**                    |
 |----------|----------|--------------------------------------|
