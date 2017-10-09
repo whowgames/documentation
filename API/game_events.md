@@ -12,7 +12,7 @@ Table of Contents
 	- [Type: scatters](#type-scatters)
 	- [Type: freespins](#type-freespins)
 	- [Type: casinoFreespins](#type-casinofreespins)
-	- [Type: bonusGameWin](#type-bonusGameWin)
+	- [Type: bonusGameWin](#type-bonusgamewin)
 	- [Type: betSizeChange](#type-betsizechange)
 	- [Type: lineNumberChange](#type-linenumberchange)
 	- [Type: autoSpin](#type-autospin)
@@ -110,7 +110,7 @@ Type: bonusGameWin
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "freespinWin" | event type | **YES** |
+| type     | String   | "bonusGameWin" | event type | **YES** |
 | value    |  Float(19.4) | 1250000 | winning chip amount | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
 
