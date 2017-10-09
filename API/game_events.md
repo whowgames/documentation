@@ -12,7 +12,7 @@ Table of Contents
 	- [Type: scatters](#type-scatters)
 	- [Type: freespins](#type-freespins)
 	- [Type: casinoFreespins](#type-casinofreespins)
-	- [Type: freespinsWin](#type-freespinswin)
+	- [Type: freespinWin](#type-freespinwin)
 	- [Type: betSizeChange](#type-betsizechange)
 	- [Type: lineNumberChange](#type-linenumberchange)
 	- [Type: autoSpin](#type-autospin)
@@ -101,16 +101,16 @@ Type: casinoFreespins
 | value    | Integer | 10 | amount of freespins gained | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the freespins are played | **YES** |
 
-Type: freespinsWin
+Type: freespinWin
 ---------------------
 
-*freespinsWin* is used whenever the user has won chips within an freespin.
+*freespinWin* is used whenever the user has won chips within an freespin.
 
 #### Parameters
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "freespinsWin" | event type | **YES** |
+| type     | String   | "freespinWin" | event type | **YES** |
 | value    |  Float(19.4) | 1250000 | winning chip amount | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the freespins are played | **YES** |
 
