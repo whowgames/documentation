@@ -234,7 +234,7 @@ Before you get an overview over all calls it would be good to give you some tips
 When to use which call
 --------------------------
 
-It’s importand for the users feeling, that you’re going to fire the calls when the user finaly sees the numbers. Otherwise he will notified update the new chips, before he sees what he got.
+It’s importand for the users feeling, that you’re going to fire the calls when the user finaly sees the numbers. Otherwise he will be notified with the new chips, before he sees what he got in your game.
 
 In case of auto play, it’s good practice to use the [GameSessions::play](#gamesessionsplay) call.
 
