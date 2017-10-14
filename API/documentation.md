@@ -16,7 +16,8 @@ Table of Contents
     - [Calculate the Signature](#calculate-the-signature)
     - [Add the Signing Information to the Request](#add-the-signing-information-to-the-request)
 
-- [Best Practises](#best-practises)  
+- [Best Practises](#best-practises)
+    - [When to use which call](#when-to-use-which-call)
     - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)  
 
 - [Calls](#calls)  
@@ -229,6 +230,15 @@ Best Practises
 ==============
 
 Before you get an overview over all calls it would be good to give you some tips about what is best practise with our API and what you should try to avoid.
+
+When to use which call
+--------------------------
+
+It’s importand for the users feeling, that you’re going to fire the calls when the user finaly sees the numbers. Otherwise he will notified update the new chips, before he sees what he got.
+
+In case of auto play, it’s good practice to use the [GameSessions::play](#gamesessionsplay) call.
+
+If the user wins some bonus games or gambeling. Please use [GameSessions::bet](#gamesessionsbet) and [GameSessions::close](#gamesessionsclose) instead.
 
 Periodic Wallet Update in Idle Mode
 --------------------------
