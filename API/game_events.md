@@ -18,7 +18,7 @@ Table of Contents
 	- [Type: autoSpin](#type-autospin)
 	- [Type: fastSpin](#type-fastspin)
 	- [Type: maxiPlay](#type-maxiplay)
-	- [Type: fullRow] (#type-fullRow)
+	- [Type: fullRow](#type-fullRow)
 
 Revision History
 ================
