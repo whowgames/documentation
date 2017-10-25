@@ -19,6 +19,7 @@ Table of Contents
 	- [Type: fastSpin](#type-fastspin)
 	- [Type: maxiPlay](#type-maxiplay)
 	- [Type: fullRow](#type-fullrow)
+	- [Type: symbols](#type-symbols)
 
 Revision History
 ================
@@ -189,3 +190,17 @@ Type: fullRow
 | value    | Integer | 5 | how many in a row | **YES** |
 | wildcard    | Boolean | true | reached using wildcards (wilds) | **YES** |
 | count    | Integer | 1 | how many rows | **YES** |
+
+Type: symbols
+----------------
+
+*symbols* is used with the winning symbols
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "symbols" | event type | **YES** |
+| value    | Array | [1, 2] | winning symbols | **YES** |
+| betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
+
