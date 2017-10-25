@@ -211,6 +211,12 @@ Type: special
 
 *special* is used for game/publisher related special events
 
+Current SubTypes are:
+* expandingWild
+* substitute
+* winMultiplier
+* stickyWild
+
 #### Parameters
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
