@@ -189,7 +189,7 @@ Type: fullRow
 | type     | String   | "fullRow" | event type | **YES** |
 | value    | Integer | 5 | how many in a row | **YES** |
 | wildcard    | Boolean | true | reached using wildcards (wilds) | **YES** |
-| symbols    | Array | [symbolId] | which symbols | **YES** |
+| symbols    | Array | [0, 0, 1] | which symbols | **YES** |
 
 Type: symbols
 ----------------
@@ -202,5 +202,20 @@ Type: symbols
 |----------|----------|-------------------|-----------------|------------------|
 | type     | String   | "symbols" | event type | **YES** |
 | value    | Array | [1, 2] | winning symbols | **YES** |
+| betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
+
+
+Type: special
+----------------
+
+*special* is used for game/publisher related special events
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "symbols" | event type | **YES** |
+| subType | String | "expandingWild" | name of the special event | **NO** |
+| value    | Integer | 1 | event value | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
 
