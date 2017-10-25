@@ -18,6 +18,7 @@ Table of Contents
 	- [Type: autoSpin](#type-autospin)
 	- [Type: fastSpin](#type-fastspin)
 	- [Type: maxiPlay](#type-maxiplay)
+	- [Type: fullRow] (#type-fullRow)
 
 Revision History
 ================
@@ -174,3 +175,17 @@ This event refers to a special game mode from Gamomat games.
 |----------|----------|-------------------|-----------------|------------------|
 | type     | String   | "maxiPlay" | event type | **YES** |
 | value    | Boolean | true | maxi play on or off | **YES** |
+
+Type: fullRow
+----------------
+
+*fullRow* is used whenever the users wins an fullRow.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "fullRow" | event type | **YES** |
+| value    | Integer | 5 | how many in a row | **YES** |
+| wildcard    | Boolean | true | reached using wildcards (wilds) | **YES** |
+| count    | Integer | 1 | how many rows | **YES** |
