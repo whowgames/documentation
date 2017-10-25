@@ -20,6 +20,7 @@ Table of Contents
 	- [Type: maxiPlay](#type-maxiplay)
 	- [Type: fullRow](#type-fullrow)
 	- [Type: symbols](#type-symbols)
+	- [Type: special](#type-special)
 
 Revision History
 ================
