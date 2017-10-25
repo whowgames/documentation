@@ -189,7 +189,7 @@ Type: fullRow
 | type     | String   | "fullRow" | event type | **YES** |
 | value    | Integer | 5 | how many in a row | **YES** |
 | wildcard    | Boolean | true | reached using wildcards (wilds) | **YES** |
-| count    | Integer | 1 | how many rows | **YES** |
+| symbols    | Array | [symbolId] | which symbols | **YES** |
 
 Type: symbols
 ----------------
