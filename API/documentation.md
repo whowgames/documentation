@@ -46,6 +46,7 @@ Revision History
 | 1.3         | 16.06.2016 | Added GameEvents namespace and removed REST support | fschemmer | - |
 | 1.3.1         | 14.11.2016 | Added birthday to GameSessions::get | fschemmer | - |
 | 1.3.2         | 08.08.2017 | Removed deprecated steps object | mkercmar | - |
+| 1.3.3         | 29.09.2017 | Added documentation about additional parameters | sambros | - |
 
 Copyright
 =========
