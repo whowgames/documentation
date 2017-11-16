@@ -20,6 +20,7 @@ Table of Contents
 	- [Type: maxiPlay](#type-maxiplay)
 	- [Type: fullRow](#type-fullrow)
 	- [Type: symbols](#type-symbols)
+	- [Type: symbolsWin](#type-symbolsWin)
 	- [Type: special](#type-special)
 
 Revision History
@@ -195,7 +196,20 @@ Type: fullRow
 Type: symbols
 ----------------
 
-*symbols* is used to transmit all symbols in view port
+*symbols* is used to transmit all symbols visible to an user
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "symbols" | event type | **YES** |
+| value    | Array | [1, 3, 5, 7, 9, 1, 2, 4, 6, 7, 8, 9, 10, 12, 14] | each element should represent a symbol number | **YES** |
+| betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
+
+Type: symbolsWin
+----------------
+
+*symbolsWin* is used to transmit all symbols contained in winning lines
 
 #### Parameters
 
