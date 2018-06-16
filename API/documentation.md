@@ -18,19 +18,19 @@ Table of Contents
 
 - [Best Practises](#best-practises)
     - [When to use which call](#when-to-use-which-call)
-    - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)  
+    - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)
 
-- [Calls](#calls)  
+- [Calls](#calls)
     - [GameSessions](#gamesessions)
-        - [GameSessions::get](#gamesessionsget)  
-        - [GameSessions::wallet](#gamesessionswallet)  
-        - [GameSessions::play](#gamesessionsplay)  
-        - [GameSessions::bet](#gamesessionsbet)  
-        - [GameSessions::close](#gamesessionsclose)  
+        - [GameSessions::get](#gamesessionsget)
+        - [GameSessions::wallet](#gamesessionswallet)
+        - [GameSessions::play](#gamesessionsplay)
+        - [GameSessions::bet](#gamesessionsbet)
+        - [GameSessions::close](#gamesessionsclose)
         - [GameSessions::cancel](#gamesessionscancel)
         - [GameSessions::validateFreespins](#gamesessionsvalidatefreespins)
     - [GameEvents](#gameevents)
-        - [GameEvents::trigger](#gameeventstrigger)  
+        - [GameEvents::trigger](#gameeventstrigger)
 
 Revision History
 ================
@@ -41,12 +41,13 @@ Revision History
 | 1.0.0       | 05.09.2014 | Camel Casing                                       | fschemmer | -            |
 | 1.0.1       | 08.09.2014 | Added user variables                               | fschemmer | -            |
 | 1.0.2       | 13.10.2014 | Added new bet amounts, virtualAmount and stop on autoPlay | fschemmer | -            |
-| 1.1         | 16.02.2015 | Update document from .docX -> .md, various updates & fixes, added "Best Practices" section | fschemmer | -           
+| 1.1         | 16.02.2015 | Update document from .docX -> .md, various updates & fixes, added "Best Practices" section | fschemmer | -
 | 1.2         | 23.05.2016 | Updated copyright, added freespins with fixed bet amount | fschemmer | - |
 | 1.3         | 16.06.2016 | Added GameEvents namespace and removed REST support | fschemmer | - |
-| 1.3.1         | 14.11.2016 | Added birthday to GameSessions::get | fschemmer | - |
-| 1.3.2         | 08.08.2017 | Removed deprecated steps object | mkercmar | - |
-| 1.3.3         | 29.09.2017 | Added documentation about additional parameters | sambros | - |
+| 1.3.1       | 14.11.2016 | Added birthday to GameSessions::get | fschemmer | - |
+| 1.3.2       | 08.08.2017 | Removed deprecated steps object | mkercmar | - |
+| 1.3.3       | 29.09.2017 | Added documentation about additional parameters | sambros | - |
+| 1.3.4       | 27.05.2018 | Name, birthday and gender are no longer filled with real values, instead dummy data is transmited | mkercmar | - |
 
 Copyright
 =========
@@ -56,7 +57,7 @@ Copyright © 2014 - 2017 Whow Games GmbH. All rights reserved.
 Introduction
 ============
 
-The Whow API serves as an API to connect your games and services to the Whow backend.  
+The Whow API serves as an API to connect your games and services to the Whow backend.
 This document is intended for software developers and other technical positions.
 
 Getting started
@@ -99,21 +100,21 @@ In order to access the Whow API you need to authenticate yourself for each reque
 
 The next steps will guide you through the process of creating the authorization header. To give you an idea of a sample request without any authorization header consider the following example of how an user update request might look like.
 
->PUT [https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)  
+>PUT [https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)
 
->Host: api.jackpot.de  
-Content-Type: application/json; charset=utf-8  
-X-whow-date: 20140828T163000Z  
+>Host: api.jackpot.de
+Content-Type: application/json; charset=utf-8
+X-whow-date: 20140828T163000Z
 
 >{"name":"John Doe"}
 
 After you have created a signature for this call it might look like this.
 
->PUT [https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)  
+>PUT [https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121 HTTP/1.1](https://api.jackpot.de/users/ef9f237e8aaec2893b6b2121%20HTTP/1.1)
 
->Authorization: SHA256 Credential=ef9f237e8aaec2893b6b2121, SignedHeaders=content-type;host;x-whow-date, Signature=7921c3698fb7f40ed9cea807c1dc135e2739c4d5c56bd6a7e090bec4eee7f5c4  
-Host: api.jackpot.de  
-Content-Type: application/json; charset=utf-8  
+>Authorization: SHA256 Credential=ef9f237e8aaec2893b6b2121, SignedHeaders=content-type;host;x-whow-date, Signature=7921c3698fb7f40ed9cea807c1dc135e2739c4d5c56bd6a7e090bec4eee7f5c4
+Host: api.jackpot.de
+Content-Type: application/json; charset=utf-8
 X-whow-date: 20140828T163000Z
 
 >{"name":"John Doe"}
@@ -125,10 +126,10 @@ To get started with the signing process you need to create a string that include
 
 Pseudocode of a canonical request string:
 
->CanonicalRequest =  
-HTTPRequestMethod + ‘\\n’ +  
-CanonicalURI + ‘\\n’ +  
-CanonicalHeaders + ‘\\n’ +  
+>CanonicalRequest =
+HTTPRequestMethod + ‘\\n’ +
+CanonicalURI + ‘\\n’ +
+CanonicalHeaders + ‘\\n’ +
 SignedHeaders + ‘\\n’ +
 
 >RequestString = Lower(Hash(Payload))
@@ -144,9 +145,9 @@ To create a canonical request, concatenate the following components from each st
     >/users/ef9f237e8aaec2893b6b2121\\n
 
 3.  Add the canonical headers followed by a newline character. The canonical headers consist of a list of HTTP headers that are included in the request to the Whow API. You can include whatever headers you want in here as long as they are sent as real headers in the request as well. Make sure that all headers are sorted alphabetically. All header names (the part in front of the colon) must be lowercase and without leading or trailing whitespaces. The value for each header must be without leading and trailing whitespaces as well. After each header line there is a newline character.
-    >content-type:application/json; charset=utf-8\\n  
-    host:api.jackpot.de\\n  
-    x-whow-date:20140828t163000z\\n  
+    >content-type:application/json; charset=utf-8\\n
+    host:api.jackpot.de\\n
+    x-whow-date:20140828t163000z\\n
     \\n
 
 4.  Add the signed headers followed by a newline character. This value is a list of the names of the headers that were included as canonical headers in step 3. Each header that is specified here must be in the real request and in the canonical headers as well. Make sure that each header name is lowercase and that all header names are sorted alphabetically. All header names are then concatenated into a string separating each header with a semi colon.
@@ -155,20 +156,20 @@ To create a canonical request, concatenate the following components from each st
 5.  Use a hash function like SHA-256 to create a hash value of the JSON payload you are sending with your request. Keep in mind that by HTTP standards there can’t be a payload if you are using GET as request method. In this case you need to provide an empty string *""* into the hashing method. In case of any other request method without payload you need to supply an empty JSON array ‘*[]*’ as string. In case you have a JSON string as payload you will use this string as is.
     >Sample payload:
     >
-    >     {"name":"John Doe"}  
+    >     {"name":"John Doe"}
     >Hashed payload:
     >
     >     f9302c25f1b5941903d562d3fc43dfb0e814c65bf6f63ba5baa0a758d34982d3
 
 6.  To construct the finished canonical request combine all the components from each steps as a single string. As already mentioned each component must end with a newline character. The resulting canonical request should look like this.
-    >POST\\n  
-    /users/ef9f237e8aaec2893b6b2121\\n  
-    content-type:application/json; charset=utf-8\\n  
-    host:api.jackpot.de\\n  
-    x-whow-date:20140828t163000z\\n  
-    \\n  
-    content-type;host;x-whow-date\\n  
-    f9302c25f1b5941903d562d3fc43dfb0e814c65bf6f63ba5baa0a758d34982d3  
+    >POST\\n
+    /users/ef9f237e8aaec2893b6b2121\\n
+    content-type:application/json; charset=utf-8\\n
+    host:api.jackpot.de\\n
+    x-whow-date:20140828t163000z\\n
+    \\n
+    content-type;host;x-whow-date\\n
+    f9302c25f1b5941903d562d3fc43dfb0e814c65bf6f63ba5baa0a758d34982d3
 
 7.  Create a hash of the canonical request by using the same algorithm you already used to hash the payload. The hashed canonical request must be represented as a string of lowercase hexadecimal characters.
     The resulting hashed canonical request should look like this. You will use this value again in later stages of the signing process.
@@ -180,9 +181,9 @@ Create a String to Sign
 The string to sign includes more information about your request and the canonical request you created in the step before. This string will be used when calculating the actual signature in the end.
 
 Pseudocode of a *string to sign* string:
-> StringToSign =  
->     Algorithm + ‘\\n’ +  
->     RequestDate + ‘\\n’ + 
+> StringToSign =
+>     Algorithm + ‘\\n’ +
+>     RequestDate + ‘\\n’ +
 >     HashedCanonicalRequest
 
 1.  Start with the algorithm you already used for signing your canonical request. It is crucial that you will use the same algorithm for everything you do.
@@ -195,8 +196,8 @@ Pseudocode of a *string to sign* string:
     >8ea0ab5b0cb5f65af16bc01340e2129ba426b350852237c54a3f66821b1166cf
 
 The end result of this process should look like this then:
-> SHA256\\n  
-> 20140828T163000Z\\n  
+> SHA256\\n
+> 20140828T163000Z\\n
 > 8ea0ab5b0cb5f65af16bc01340e2129ba426b350852237c54a3f66821b1166cf
 
 Calculate the Signature
@@ -205,10 +206,10 @@ Calculate the Signature
 Before you calculate the signature you need to derive a signing key from your secret key which is provided with the public API access key by Whow when you asked for access to the Whow API. If you have no API access key and secret key yet, please contact us for further assistance.
 
 1.  Derive your signing key by using your secret key to create a series of hash-based message authentication codes (HMACs). In the following example HMAC represents an HMAC-SHA256 function. However: You need to use the same hashing algorithm within the HMAC function as you used for all the previous hashing operations as well. The result of each hash functions becomes input for the next one. The following pseudo code will use the HMAC function with (key, data) as parameters:**
-    >Secret = Your Secret Key  
-    Date = HMAC("whow" + Secret, Date)  
-    SigningKey = HMAC(Date, "whow\_request")  
-    
+    >Secret = Your Secret Key
+    Date = HMAC("whow" + Secret, Date)
+    SigningKey = HMAC(Date, "whow\_request")
+
     Note that the variable *Date* used in the hashing process is just the date (for example, 20140828), not a complete date and time.
 
 2.  Calculate the signature. To do this, use the signing key that you received when doing the previous step as key and the *string to sign* as data from the previous chapter. The following pseudo code will use the HMAC function with (key, data) as parameters:
@@ -254,59 +255,57 @@ Each request you make to the Whow API will have the same basic JSON response for
 
 This is a success JSON encoded response to give you a better understanding:
 
->{  
-   **"status"**:200,  
-   **"payload"**:{  
-      **"user"**:{  
-         "**id"**:"53fc9eb31b4d5eef118b4569",  
-         **"gender"**:"male",  
-         **"locale"**:"de\_DE",  
-         **"name"**:"john\_doe",  
-         **"wallet"**:{    
-            **"chips"**:1217900  
-         }  
-      },  
-      **"game"**:{    
-         **"settings"**:{    
-            **"bets"**:[    
-               50,  
-               100,  
-               250,  
-               500,  
-               1000,  
-               2500,  
-               5000,  
-               10000,  
-               25000  
-            ]  
-         }  
-      }  
-   }  
-}  
+>{
+   **"status"**:200,
+   **"payload"**:{
+      **"user"**:{
+         "**id"**:"53fc9eb31b4d5eef118b4569",
+         **"locale"**:"de\_DE",
+         **"wallet"**:{  
+            **"chips"**:1217900
+         }
+      },
+      **"game"**:{  
+         **"settings"**:{  
+            **"bets"**:[  
+               50,
+               100,
+               250,
+               500,
+               1000,
+               2500,
+               5000,
+               10000,
+               25000
+            ]
+         }
+      }
+   }
+}
 
 This is an error, JSON encoded, response:
 
->{  
-   **"status"**:400,  
-   **"errors"**:[  
-      "round is not open anymore"  
-   ],  
-   **"payload"**:[  
-   ]  
-}  
+>{
+   **"status"**:400,
+   **"errors"**:[
+      "round is not open anymore"
+   ],
+   **"payload"**:[
+   ]
+}
 
 Resulting from this you want to check the payload after each and every request and update the corresponding data within your application. Keep in mind that normally you just receive the information you requested. So if you are requesting the current balance of a user wallet you will not receive the whole user object with all the data within the payload but rather a user object which just contains the wallet object:
 
->{  
-   **"status"**:200,  
-   **"payload"**:{  
-      **"user"**:{  
-         **"wallet"**:{  
-            **"chips"**:1217900  
-         }  
-      }  
-   }  
-}  
+>{
+   **"status"**:200,
+   **"payload"**:{
+      **"user"**:{
+         **"wallet"**:{
+            **"chips"**:1217900
+         }
+      }
+   }
+}
 
 GameSessions
 ------------
@@ -359,10 +358,7 @@ The user object contains the following parameters:
 | **Name**      | **Type**   | **Example Value**          | **Description**                                           |
 |---------------|------------|----------------------------|-----------------------------------------------------------|
 | id            | String     | "53fc9eb31b4d5eef118b4569" | id of the user                                            |
-| name          | String     | "john\_doe"                | name of the user                                          |
 | locale        | Char(5)    | "de\_DE"                   | locale of the user                                        |
-| birthday      | Char(8)    | "26-04-1993"                   | birthday of the user; default after signup `1-1-1970`                                        |
-| gender        | String     | "male"                     | gender of the user                                        |
 | wallet        | Object     | {"chips": 1250.00}         | wallet object                                             |
 | level         | Integer    | 100                        | level of the user                                         |
 | levelProgress | Float(1,2) | 0.04                       | progress of the user to the next level in percent (0 – 1) |
@@ -395,7 +391,7 @@ The freespins object contains the following parameters:
 | betAmount | Float(19,4) | 1250.00 | bet amount of each freespin |
 
 
-#### 
+####
 
 #### Response on failure
 
@@ -423,7 +419,7 @@ The call *wallet* is used to request the current user wallet with all available 
 
 >No payload needed so please provide an empty JSON array here.
 
-#### 
+####
 
 #### Example request
 
@@ -486,7 +482,7 @@ The call *play* is used to instantly play a complete game round with a given bet
 | virtualAmount | Float    | 0                  | amount to bet in case of free spins; important: this parameter is optional and only used in special cases for freespins!         |
 | winAmount     | Float    | 0                  | amount the user will win in this round         |
 
-#### 
+####
 
 #### Example request
 
