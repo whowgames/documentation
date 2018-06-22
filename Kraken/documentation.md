@@ -1,5 +1,5 @@
 
-# Data API 
+# Kraken API
 
 ## Authentication
 
@@ -34,7 +34,7 @@ signature = HMAC(string + secureKey)
 Example of a API request. 
 
 ```
-POST https://kraken.whowsrv.net/v1/user/createUsers
+POST https://kraken-71.whow.net/v1/user/createUsers
 
 X-AUTH-USER: demo-user
 X-AUTH-SIG: c1a8f9c13b3f917....
@@ -307,6 +307,49 @@ Request body:
 ```
 
 Success 200 response: 
+
+```
+{
+  'status': true,
+  'data': {
+    'success': integer,
+    'error': integer,
+  },
+  'errors': null,
+}
+```
+
+## Game Methods
+
+### POST /v1/game/play
+
+Request body:
+
+```
+[
+  {
+   'user_id': string mandatory,
+   'game_id': string mandatory, 
+   'play_started': datetime mandatory,
+   'play_ended': datetime mandatory,
+   'play_result': string mandatory (Options: 'win', 'lost'),
+   'platform' string mandatory (Options: 'web', 'ios', 'android', 'amazon'),
+   'coin_balance' integer mandatory,
+   'game_level' integer mandatory,
+   'bet_amount': integer optional,
+   'bet_currency': string optional,
+   'bet_type': string optional (Options: 'virtual', 'Real'),
+   'win_amount': integer optional,
+   'win_currency': string optional,
+   'win_type': string optional (Options: 'virtual', 'Real'),
+   'portal' string optional,
+   'session_id' string optional,
+  },
+  ...
+]
+```
+
+Success 200 response:
 
 ```
 {
