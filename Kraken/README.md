@@ -31,10 +31,18 @@ signature = HMAC(string + secureKey)
 
 ## General Information
 
+In the production system running on under the url
+
+https://kraken.whow.net
+
+The sandbox system running on under the url
+
+https://kraken-staging.whow.net
+
 Example of a API request. 
 
 ```
-POST https://kraken-71.whow.net/v1/user/createUsers
+POST https://kraken.whow.net/v1/user/createUsers
 
 X-AUTH-USER: demo-user
 X-AUTH-SIG: c1a8f9c13b3f917....
