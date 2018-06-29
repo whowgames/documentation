@@ -85,6 +85,8 @@ Data types hints:
 - Country values are in 2-letter code (ISO 3166-1 alpha-2)
 - Currency values are in 3-letter code (ISO 4217)
 - Locale values are 5-letter code with lowercase language code and uppercase country code (e.g. "en_GB" or "en_US")
+- The `coin_balance` field is mandatory, but can be zero (0)
+- The `game_level` field is mandatory, but if you don't have levels in you game set this to 1
 
 
 ## User Methods
@@ -188,8 +190,6 @@ Success 200 response:
 ```
 
 ### POST /v1/user/trackEvents
-
-The `coin_balance` field is mandatory, but can be zero (0). 
 
 Request body:
 
@@ -330,6 +330,11 @@ Success 200 response:
 ## Game Methods
 
 ### POST /v1/game/play
+
+Use this method for any action of a user in the game. For example the user play 
+a round or spin on a slot. For all actions the user bet or win coins or real money. 
+
+The `play_started` and `play_ended` fields can be equal. 
 
 Request body:
 
