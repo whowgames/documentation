@@ -336,9 +336,6 @@ a round or spin on a slot. For all actions the user bet or win coins or real mon
 
 The `play_started` and `play_ended` fields can be equal. 
 
-At a `play_result = revert` call the value of the fields `bet_amount` and `win_amount` 
-must be negative.
-
 Request body:
 
 ```
@@ -348,7 +345,7 @@ Request body:
    'game_id': string mandatory, 
    'play_started': datetime mandatory,
    'play_ended': datetime mandatory,
-   'play_result': string mandatory (Options: 'win', 'lost', 'bet', 'revert'),
+   'play_result': string mandatory (Options: 'win', 'lost', 'bet', 'exchange'),
    'platform': string mandatory (Options: 'web', 'ios', 'android', 'amazon'),
    'coin_balance': integer mandatory,
    'game_level': integer mandatory,
