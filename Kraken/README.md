@@ -374,3 +374,26 @@ Success 200 response:
   'errors': null,
 }
 ```
+
+## Payout Methods
+
+### POST /v1/payout/book
+
+Request body:
+
+```
+[
+  {
+   'user_id': string mandatory,
+   'paid_out': datetime mandatory,
+   'type': string mandatory (Options: 'money'),
+   'amount': float mandatory,
+   'currency': string mandatory,
+   'country': string mandatory,
+   'platform': string mandatory (Options: 'web', 'ios', 'android', 'amazon'),
+   'portal': string optional,
+   'session_id': string optional,
+  },
+  ...
+]
+```
