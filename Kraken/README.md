@@ -306,6 +306,7 @@ Request body:
   {
     'payment_id': string mandatory,
     'status': string mandatory (Options: 'pending', 'paid', 'failed', 'cancelled', 'refunded', 'repaid'),
+    'user_id': string|null mandatory,
     'currency': string|null optional, 
     'fee_chargeback': float|null optional,
     'paid': datetime|null optional,
