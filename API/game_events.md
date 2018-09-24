@@ -30,11 +30,12 @@ Revision History
 |-------------|------------|----------------------------------------------------|-----------|--------------|
 | 0.1.0       | 13.06.2016 | Initial version                                    | fschemmer | -            |
 | 0.1.1       | 18.10.2016 | Added casinoFreespins                              | fschemmer | -            |
+| 0.1.2       | 07.09.2018 | Changed win fields                              | sambros | -            |
 
 Copyright
 =========
 
-Copyright © 2016 Whow Games GmbH. All rights reserved.
+Copyright © 2016-2018 Whow Games GmbH. All rights reserved.
 
 Introduction
 ============
@@ -60,7 +61,9 @@ Type: win
 | type     | String   | "bet" | event type | **YES** |
 | betAmount | Float(19.4) | 1250 | chip amount bet to achieve this win amount | **YES** |
 | value    | Float(19.4) | 1250000 | winning chip amount | **YES** |
-| winType | String | "legendary" | displayed type of the win within the slot | **NO** |
+| winType | String | "normal" or "big" or "mega" or "monster" or "legendary" | displayed type of the win within the slot | **YES** |
+| isFreeGameWin| Bool | true or false | is this win inside a free spin round | **YES** |
+| sumFreeGameWin| Float(19.4) | 1250000 | sum of the current freeSpin wins | **NO** |
 
 Type: scatters
 ---------
