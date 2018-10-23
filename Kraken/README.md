@@ -10,6 +10,8 @@ For the authentication you need a username and secure key. The username and a fo
 each request generated signature have to be sent in the request header.
 
 ```
+Accept: application/json
+Content-Type: application/json; charset=utf-8
 X-AUTH-USER: demo-user
 X-AUTH-SIG: c1a8f9c13b3f917....
 ```
