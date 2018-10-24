@@ -10,8 +10,6 @@ For the authentication you need a username and secure key. The username and a fo
 each request generated signature have to be sent in the request header.
 
 ```
-Accept: application/json
-Content-Type: application/json; charset=utf-8
 X-AUTH-USER: demo-user
 X-AUTH-SIG: c1a8f9c13b3f917....
 ```
@@ -245,6 +243,12 @@ For the status `repaid` the field `paid` must be filled with the time the paymen
 and the field `cancelled` must be filled with the time the payment was book back
 and the field `repaid` must be filled with the time payment was repaid.
 
+For mobile/app payments use `iTunes`, `GooglePlay` or `Amazon` as payment provider 
+and `in-app` as payment method. 
+
+If you use the Whow payment service use the field `paymentMethod` and `paymentProvider` 
+from the `billing` notification as payment provider and method.
+
 Request body:
 
 ```
@@ -341,6 +345,10 @@ a round or spin on a slot. For all actions the user bet or win coins or real mon
 
 The `play_started` and `play_ended` fields can be equal. 
 
+If you add a `bet_amount` value, you have also add `bet_currency` and `bet_type`.
+
+If you add a `win_amount` value, you have also add `win_currency` and `win_type`.
+
 Request body:
 
 ```
@@ -350,7 +358,7 @@ Request body:
    'game_id': string mandatory, 
    'play_started': datetime mandatory,
    'play_ended': datetime mandatory,
-   'play_result': string mandatory (Options: 'win', 'lost', 'bet', 'exchange'),
+   'play_result': string mandatory (Options: 'win', 'lost', 'bet', 'exchange', 'init'),
    'platform': string mandatory (Options: 'web', 'ios', 'android', 'amazon'),
    'coin_balance': integer mandatory,
    'game_level': integer mandatory,
@@ -396,6 +404,7 @@ Request body:
    'currency': string mandatory,
    'country': string mandatory,
    'platform': string mandatory (Options: 'web', 'ios', 'android', 'amazon'),
+   'transaction_id': string|null optional,
    'portal': string|null optional,
    'session_id': string|null optional,
   },
