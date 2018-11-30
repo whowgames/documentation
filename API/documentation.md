@@ -48,6 +48,7 @@ Revision History
 | 1.3.2       | 08.08.2017 | Removed deprecated steps object | mkercmar | - |
 | 1.3.3       | 29.09.2017 | Added documentation about additional parameters | sambros | - |
 | 1.3.4       | 27.05.2018 | Name, birthday and gender are no longer filled with real values, instead dummy data is transmited | mkercmar | - |
+| 1.3.5       | 30.11.2018 | Remove gameData object from documentation & payload examples | mkercmar | - |
 
 Copyright
 =========
@@ -333,7 +334,6 @@ In case you are using the freespin object, which is part of the game object, to 
 
 >No payload needed so please provide an empty JSON array here.
 
-
 #### Example request
 
 >URL
@@ -389,7 +389,6 @@ The freespins object contains the following parameters:
 | id       | String   | "53fc9eb31b4d5eef118b4569" | id of the freespin set |
 | amount   | Integer  | 12 | amount of freespins |
 | betAmount | Float(19,4) | 1250.00 | bet amount of each freespin |
-
 
 ####
 
@@ -492,7 +491,7 @@ The call *play* is used to instantly play a complete game round with a given bet
 >
 > Payload
 >
->     {"betAmount":1250,"winAmount":0,"gameData":{"uid":100}}
+>     {"betAmount":1250,"winAmount":0}
 
 #### Response on success
 
@@ -589,7 +588,7 @@ The call *bet* is used to bet on a game round. Important: If there is no round i
 >
 >Payload
 >
->     {"betAmount":1250,"roundId":"ca5217a205e148ba85f73bc37ad7e0a0","gameData":{"uid":100}}
+>     {"betAmount":1250,"roundId":"ca5217a205e148ba85f73bc37ad7e0a0"}
 
 #### Response on success
 
@@ -677,7 +676,6 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 | **Name**  | **Type** | **Example Value**   | **Description**                                |
 |-----------|----------|---------------------|------------------------------------------------|
 | winAmount | Float    | 2500                | closing win amount for this round              |
-| gameData  | Object   | {"spinResult":[…]}  | gameData the game wants to track to the casino |
 | roundId   | String   | "ca5217a205e148ba…" | round id to close                              |
 
 #### Example request
@@ -688,7 +686,7 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 >
 >Payload
 >
->     {"winAmount":2500,"roundId":"ca5217a205e148ba85f73bc37ad7e0a0","gameData":{"uid":100}}
+>     {"winAmount":2500,"roundId":"ca5217a205e148ba85f73bc37ad7e0a0"}
 
 #### Response on success
 
@@ -755,7 +753,7 @@ The call *cancel* is used to cancel a game round and return the bets to the user
 
 #### URL
 
-><https://api.jackpot.de/game\_sessions/action/close/{:token}>
+><https://api.jackpot.de/game\_sessions/action/cancel/{:token}>
 
 The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
 
@@ -765,7 +763,6 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 >
 | **Name** | **Type** | **Example Value**   | **Description**                                |
 |----------|----------|---------------------|------------------------------------------------|
-| gameData | Object   | {"spinResult":[…]}  | gameData the game wants to track to the casino |
 | roundId  | String   | "ca5217a205e148ba…" | round id to close                              |
 
 #### Example request
@@ -776,7 +773,7 @@ The *{:token}* parameter is the token assigned to your game session which was ha
 >
 >Payload
 >
->     {"roundId":"ca5217a205e148ba85f73bc37ad7e0a0","gameData":{"uid":100}}
+>     {"roundId":"ca5217a205e148ba85f73bc37ad7e0a0"}
 
 #### Response on success
 
