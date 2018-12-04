@@ -207,7 +207,7 @@ Type: symbols
 |----------|----------|-------------------|-----------------|------------------|
 | type     | String   | "symbols" | event type | **YES** |
 | value    | Array | [1, 3, 5, 7, 9, 1, 2, 4, 6, 7, 8, 9, 10, 12, 14] | each element should represent a symbol number | **YES** |
-| betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
+| betAmount | Integer | 12500 | bet amount of spin | **YES** |
 
 Type: symbolsWin
 ----------------
@@ -220,7 +220,7 @@ Type: symbolsWin
 |----------|----------|-------------------|-----------------|------------------|
 | type     | String   | "symbols" | event type | **YES** |
 | value    | Array | [1, 3, 5, 7, 9, 1, 2, 4, 6, 7, 8, 9, 10, 12, 14] | each element should represent a symbol number | **YES** |
-| betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
+| betAmount | Integer | 12500 | bet amount of spin | **YES** |
 
 Type: special
 ----------------
@@ -240,5 +240,4 @@ Current SubTypes are:
 | type     | String   | "symbols" | event type | **YES** |
 | subType | String | "expandingWild" | name of the special event | **NO** |
 | value    | Integer | 1 | event value | **YES** |
-| betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
-
+| betAmount | Integer | 12500 | bet amount of spin | **YES** |
