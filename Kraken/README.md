@@ -23,7 +23,7 @@ string = HASH("POST" + "/v1/user/createUsers" + "[{'user_id':'123',...},...]")
 ```
 
 The second step you create the signature with a HMAC-SHA512 function. The input 
-are the string to sign appended with the secure key. 
+are the string to sign appended with the secure key.
 
 ```
 signature = HMAC(string + secureKey)
@@ -126,7 +126,7 @@ Request body:
     'utm_pub': string|null optional,
     'source_links': array|null optional [
         {
-            'type': string mandatory (Options: 'affiliate', 'cobrand', 'adgroup'),
+            'type': string mandatory (Options: 'affiliate', 'cobrand'),
             'name': string mandatory,
         }, 
         ...
