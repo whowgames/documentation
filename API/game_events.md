@@ -218,7 +218,7 @@ Type: symbolsWin
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "symbols" | event type | **YES** |
+| type     | String   | "symbolsWin" | event type | **YES** |
 | value    | Array | [1, 3, 5, 7, 9, 1, 2, 4, 6, 7, 8, 9, 10, 12, 14] | each element should represent a symbol number | **YES** |
 | betAmount | Integer | 12500 | bet amount of spin | **YES** |
 
@@ -237,7 +237,7 @@ Current SubTypes are:
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "symbols" | event type | **YES** |
+| type     | String   | "special" | event type | **YES** |
 | subType | String | "expandingWild" | name of the special event | **NO** |
 | value    | Integer | 1 | event value | **YES** |
 | betAmount | Integer | 12500 | bet amount of spin | **YES** |
