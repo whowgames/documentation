@@ -14,14 +14,15 @@ Table of Contents
 Revision History
 ================
 
-| **Version** | **Date**   | **Changes**                                        | **Name**  | **Approved** |
-|-------------|------------|----------------------------------------------------|-----------|--------------|
-| 0.1.0       | 18.10.2016 | Initial version                                    | fschemmer | -            |
+| **Version** | **Date**   | **Changes**                                        | **Name**  |
+|-------------|------------|----------------------------------------------------|-----------|
+| 0.1.0       | 18.10.2016 | Initial version                                    | fschemmer |
+| 0.1.1       | 13.03.2019 | Added getWallet                                    | mkercmar  |
 
 Copyright
 =========
 
-Copyright © 2016 Whow Games GmbH. All rights reserved.
+Copyright © 2019 Whow Games GmbH. All rights reserved.
 
 Introduction
 ============
@@ -57,4 +58,16 @@ Type: getGameSession
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
 | type     | String   | "getGameSession" | event type | **YES** |
+| payload     | Object   | {} | empty payload | **YES** |
+
+Type: getWallet
+---------
+
+*getWallet* is used whenever the game should perform [GameSessions::wallet](https://github.com/whowgames/documentation/blob/master/API/documentation.md#gamesessionswallet) to receive current user wallet amount.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "getWallet" | event type | **YES** |
 | payload     | Object   | {} | empty payload | **YES** |
