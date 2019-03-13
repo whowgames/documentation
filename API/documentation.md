@@ -35,20 +35,21 @@ Table of Contents
 Revision History
 ================
 
-| **Version** | **Date**   | **Changes**                                        | **Name**  | **Approved** |
-|-------------|------------|----------------------------------------------------|-----------|--------------|
-| 0.1.0       | 28.08.2014 | Initial version                                    | fschemmer | -            |
-| 1.0.0       | 05.09.2014 | Camel Casing                                       | fschemmer | -            |
-| 1.0.1       | 08.09.2014 | Added user variables                               | fschemmer | -            |
-| 1.0.2       | 13.10.2014 | Added new bet amounts, virtualAmount and stop on autoPlay | fschemmer | -            |
-| 1.1         | 16.02.2015 | Update document from .docX -> .md, various updates & fixes, added "Best Practices" section | fschemmer | -
-| 1.2         | 23.05.2016 | Updated copyright, added freespins with fixed bet amount | fschemmer | - |
-| 1.3         | 16.06.2016 | Added GameEvents namespace and removed REST support | fschemmer | - |
-| 1.3.1       | 14.11.2016 | Added birthday to GameSessions::get | fschemmer | - |
-| 1.3.2       | 08.08.2017 | Removed deprecated steps object | mkercmar | - |
-| 1.3.3       | 29.09.2017 | Added documentation about additional parameters | sambros | - |
-| 1.3.4       | 27.05.2018 | Name, birthday and gender are no longer filled with real values, instead dummy data is transmited | mkercmar | - |
-| 1.3.5       | 30.11.2018 | Remove gameData object from documentation & payload examples | mkercmar | - |
+| **Version** | **Date**   | **Changes**                                        | **Name**  |
+|-------------|------------|----------------------------------------------------|-----------|
+| 0.1.0       | 28.08.2014 | Initial version                                    | fschemmer |
+| 1.0.0       | 05.09.2014 | Camel Casing                                       | fschemmer |
+| 1.0.1       | 08.09.2014 | Added user variables                               | fschemmer |
+| 1.0.2       | 13.10.2014 | Added new bet amounts, virtualAmount and stop on autoPlay | fschemmer |
+| 1.1         | 16.02.2015 | Update document from .docX -> .md, various updates & fixes, added "Best Practices" section | fschemmer |
+| 1.2         | 23.05.2016 | Updated copyright, added freespins with fixed bet amount | fschemmer |
+| 1.3         | 16.06.2016 | Added GameEvents namespace and removed REST support | fschemmer |
+| 1.3.1       | 14.11.2016 | Added birthday to GameSessions::get | fschemmer |
+| 1.3.2       | 08.08.2017 | Removed deprecated steps object | mkercmar |
+| 1.3.3       | 29.09.2017 | Added documentation about additional parameters | sambros |
+| 1.3.4       | 27.05.2018 | Name, birthday and gender are no longer filled with real values, instead dummy data is transmited | mkercmar |
+| 1.3.5       | 30.11.2018 | Remove gameData object from documentation & payload examples | mkercmar |
+| 1.3.6       | 13.03.2019 | All mentions of level, levelProgress and levelUp values removed as this is depracted | mkercmar |
 
 Copyright
 =========
@@ -360,8 +361,6 @@ The user object contains the following parameters:
 | id            | String     | "53fc9eb31b4d5eef118b4569" | id of the user                                            |
 | locale        | Char(5)    | "de\_DE"                   | locale of the user                                        |
 | wallet        | Object     | {"chips": 1250.00}         | wallet object                                             |
-| level         | Integer    | 100                        | level of the user                                         |
-| levelProgress | Float(1,2) | 0.04                       | progress of the user to the next level in percent (0 – 1) |
 
 The wallet object contains the following parameters:
 
@@ -508,23 +507,12 @@ The user object can contain the following parameters but doesn’t need to have 
 | **Name**      | **Type** | **Example Value**     | **Description**                                                       |
 |---------------|----------|-----------------------|-----------------------------------------------------------------------|
 | wallet        | Object   | {"chips": 1250.00}    | wallet object                                                         |
-| level         | Integer  | 10                    | user level                                                            |
-| levelUp       | Object   | {"previousLevel": 10} | level up object                                                       |
-| levelProgress | Float    | 0.50                  | value between 0 and 1 on how far the user is away from the next level |
 
 The wallet object contains the following parameters:
 
 | **Name** | **Type**    | **Example Value** | **Description**                |
 |----------|-------------|-------------------|--------------------------------|
 | chips    | Float(19,4) | 1250.5000         | chip amount of the user wallet |
-
-The level up object contains the following parameters:
-
-| **Name**      | **Type** | **Example Value**  | **Description**                    |
-|---------------|----------|--------------------|------------------------------------|
-| previousLevel | Integer  | 10                 | previous level before the level up |
-| newLevel      | Integer  | 11                 | new level after the level up       |
-| rewards       | Array    | ["games", "coins"] | array of awarded rewards (TBD)     |
 
 The game round object contains the following parameters:
 
@@ -605,17 +593,6 @@ The user object can contain the following parameters but doesn’t need to have 
 | **Name**      | **Type** | **Example Value**       | **Description**                                                       |
 |---------------|----------|-------------------------|-----------------------------------------------------------------------|
 | wallet        | Object   | {"chips": 1250.00}      | wallet object                                                         |
-| level         | Integer  | 10                      | user level                                                            |
-| levelUp       | Object   | {"previous\_level": 10} | level up object                                                       |
-| levelProgress | Float    | 0.50                    | value between 0 and 1 on how far the user is away from the next level |
-
-The level up object contains the following parameters:
-
-| **Name**      | **Type** | **Example Value**  | **Description**                    |
-|---------------|----------|--------------------|------------------------------------|
-| previousLevel | Integer  | 10                 | previous level before the level up |
-| newLevel      | Integer  | 11                 | new level after the level up       |
-| rewards       | Array    | ["games", "coins"] | array of awarded rewards (TBD)     |
 
 The wallet object contains the following parameters:
 
@@ -703,7 +680,6 @@ The user object can contain the following parameters but doesn’t need to have 
 | **Name** | **Type** | **Example Value**  | **Description** |
 |----------|----------|--------------------|-----------------|
 | wallet   | Object   | {"chips": 1250.00} | wallet object   |
-| level    | Integer  | 10                 | user level      |
 
 The wallet object contains the following parameters:
 
@@ -790,7 +766,6 @@ The user object can contain the following parameters but doesn’t need to have 
 | **Name** | **Type** | **Example Value**  | **Description** |
 |----------|----------|--------------------|-----------------|
 | wallet   | Object   | {"chips": 1250.00} | wallet object   |
-| level    | Integer  | 10                 | user level      |
 
 The wallet object contains the following parameters:
 
