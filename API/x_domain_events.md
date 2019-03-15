@@ -8,8 +8,10 @@ Table of Contents
 - [Copyright](#copyright)
 - [Introduction](#introduction)
 - [X-Domain Events](#x-domain-events)
-	- [Type: startCasinoFreespins](#type-startcasinofreespins)
-	- [Type: getGameSession](#type-getgamesession)
+    - [Type: getGameSession](#type-getgamesession)
+    - [Type: getWallet](#type-getwallet)
+    - [Type: stopAutoSpin](#type-stopautospin)
+    - [Type: startAutoSpin](#type-startautospin)
 
 Revision History
 ================
