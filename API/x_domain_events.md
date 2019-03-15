@@ -36,10 +36,12 @@ X-Domain Events are used to publish specific events to the game so the casino ca
 
 All events **must have** the paramter *type* and *payload*.
 
-Type: startCasinoFreespins
+~~Type: startCasinoFreespins~~
 ---------
 
-*startCasinoFreespins* is used whenever the game has received casino freespins and is waiting for the casino to tell it to start them.
+~~*startCasinoFreespins* is used whenever the game has received casino freespins and is waiting for the casino to tell it to start them.~~
+
+*startCasinoFreespins now longer required, freespins should directly started. No notification from casino required.*
 
 #### Parameters
 
