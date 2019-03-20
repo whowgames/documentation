@@ -63,37 +63,28 @@ Type: getWallet
 | type     | String   | "getWallet" | event type | **YES** |
 | payload     | Object   | {} | empty payload | **YES** |
 
-Type: stopAutoSpin
+Type: pauseAutoSpin
 ---
 
-*stopAutoSpin* is used to give the casino the possibility to stop the auto spin mechanic in the games.
+*pauseAutoSpin* is used to give the casino the possibility to stop current auto spin flow in the slot.
 
 #### Parameters
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "stopAutoSpin" | event type | **YES** |
+| type     | String   | "pauseAutoSpin" | event type | **YES** |
 | payload     | Object   | {} | empty payload | **YES** |
 
-#### Response
-
-If this event is received please post an event by ourself to the "parent" of the IFrame.
-
-| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
-|----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "autoSpinStopped" | event type | **YES** |
-| payload     | Object   | {"wasInAutoSpin": true} | payload, with key wasInAutoSpin (boolean) informing if user was actually in Auto-Spin, or not. | **YES** |
-
-Type: startAutoSpin
+Type: resumeAutoSpin
 ---
 
-*startAutoSpin* is used to give the casino the possibility to start the auto spin mechanic in the game again.
+*resumeAutoSpin* is used to give the casino the possibility to resume a paused auto spin flow in the slot.
 
-This event is sent conjunction with stopAutoSpin to provide the option to pause autospin. Currently we do not plan to use this in other cases, so for now we don't need to manipulate bet size or limiting auto spins.
+This event is sent in conjunction with pauseAutoSpin, and should only have an effect on the slot if there been paused auto spins.
 
 #### Parameters
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "startAutoSpin" | event type | **YES** |
+| type     | String   | "resumeAutoSpin" | event type | **YES** |
 | payload     | Object   | {} | empty payload | **YES** |
