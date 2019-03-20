@@ -39,6 +39,39 @@ X-Domain Events are used to publish specific events to the game so the casino ca
 
 All events **must have** the paramter *type* and *payload*.
 
+On web platform the events are sent via postMessage API: https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage
+
+On mobile platform the game needs to expose a global JavaScript Function called 'mobileAppDomainEvent'.
+
+Example Implementation:
+---------
+
+```html
+<!doctype html>
+<html>
+<head>
+    <script>
+    function mobileAppDomainEvent(message) {
+        // DATA
+        console.log(message);
+    }
+
+    window.addEventListener("message", receiveMessage, false);
+
+    function receiveMessage(event) {
+        // DATA
+        console.log(event.data);
+    }
+    </script>
+</head>
+<body>
+
+<h1>SLOT CONTENT</h1>
+
+</body>
+</html>
+```
+
 Type: getGameSession
 ---------
 
