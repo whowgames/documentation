@@ -8,10 +8,11 @@ Table of Contents
 - [Copyright](#copyright)
 - [Introduction](#introduction)
 - [X-Domain Events](#x-domain-events)
+    - [Example Implementation](#example-implementation
     - [Type: getGameSession](#type-getgamesession)
     - [Type: getWallet](#type-getwallet)
-    - [Type: stopAutoSpin](#type-stopautospin)
-    - [Type: startAutoSpin](#type-startautospin)
+    - [Type: pauseAutoSpin](#type-pauseautospin)
+    - [Type: resumeAutoSpin](#type-resumeautospin)
 
 Revision History
 ================
