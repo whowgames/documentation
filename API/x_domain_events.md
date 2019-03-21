@@ -8,7 +8,7 @@ Table of Contents
 - [Copyright](#copyright)
 - [Introduction](#introduction)
 - [X-Domain Events](#x-domain-events)
-    - [Example Implementation](#example-implementation
+    - [Example Implementation](#example-implementation)
     - [Type: getGameSession](#type-getgamesession)
     - [Type: getWallet](#type-getwallet)
     - [Type: pauseAutoSpin](#type-pauseautospin)
