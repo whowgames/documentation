@@ -36,7 +36,7 @@ This document serves as an explanation of different x-domain-events published to
 X-Domain Events
 ======
 
-X-Domain Events are used to publish specific events to the game so the casino can notify the game in special cases so that it can react accordingly. Each event has a specific type which makes them distinguishable from each other.
+X-Domain Events are used to publish given events to the game via frontend, so the game client can react to it.
 
 All events **must have** the paramter *type* and *payload*.
 
