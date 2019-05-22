@@ -381,7 +381,6 @@ The game settings object contains the following parameters:
 | **Name** | **Type** | **Example Value** | **Description**             |
 |----------|----------|-------------------|-----------------------------|
 | bets     | Array    | [400, 8000, 125000]    | currently allowed bet sizes |
-
 | defaultBet     | Integer    | 40000    | default bet which should be selected on start (even if it does not exist in bets) |
 
 The freespins object contains the following parameters:
