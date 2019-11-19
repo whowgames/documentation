@@ -51,11 +51,12 @@ Revision History
 | 1.3.5       | 30.11.2018 | Remove gameData object from documentation & payload examples | mkercmar |
 | 1.3.6       | 13.03.2019 | All mentions of level, levelProgress and levelUp values removed as this is depracted | mkercmar |
 | 1.3.7       | 22.05.2019 | Added documentation about defaultBet | sambros |
+| 1.3.7.1     | 19.11.2019 | Remove info about animation | mkercmar |
 
 Copyright
 =========
 
-Copyright © 2014 - 2017 Whow Games GmbH. All rights reserved.
+Copyright © 2014 - 2019 Whow Games GmbH. All rights reserved.
 
 Introduction
 ============
@@ -81,7 +82,6 @@ We're adding additional parameters to your launch url. Please use them to set th
 | **Name** | **Possible Values** | **Description**                    |
 |----------|----------|--------------------------------------|
 | sound     | 0\|1   | Enable the Sound 0 = sound off, 1 = sound on   |
-| animation     | 0\|1\|2   | Show all (2), some (1) or no (0) animations |
 
 Structure of URIs
 =================
