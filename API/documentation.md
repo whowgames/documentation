@@ -610,7 +610,7 @@ The game round object contains the following parameters:
 | id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
 | betAmount | Integer     | 6250                   | total bet amount of round |
 | winAmount | Integer     | 0                      | total win amount of round |
-| timestamp | Object      | {"sec":1502200341,"usec":255000}} | timestamp of last change |
+| timestamp | Integer      | 1502200341 | timestamp of last change |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
@@ -697,7 +697,7 @@ The game round object contains the following parameters:
 | id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
 | betAmount | Integer     | 6250                   | total bet amount of round |
 | winAmount | Integer     | 2000                   | total win amount of round |
-| timestamp | Object      | {"sec":1502200341,"usec":255000}} | timestamp of last change |
+| timestamp | Integer      | 1502200341 | timestamp of last change |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
@@ -783,7 +783,7 @@ The game round object contains the following parameters:
 | id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
 | betAmount | Integer     | 6250                   | total bet amount of round |
 | winAmount | Integer     | 2000                   | total win amount of round |
-| timestamp | Object      | {"sec":1502200341,"usec":255000}} | timestamp of last change |
+| timestamp | Integer      | 1502200341 | timestamp of last change |
 
 The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
 
