@@ -358,7 +358,7 @@ Request body:
    'game_id': string mandatory, 
    'play_started': datetime mandatory,
    'play_ended': datetime mandatory,
-   'play_result': string mandatory (Options: 'win', 'lost', 'bet', 'exchange', 'init'),
+   'play_result': string mandatory (Options: 'win', 'lost', 'bet', 'exchange', 'initial'),
    'platform': string mandatory (Options: 'web', 'ios', 'android', 'amazon'),
    'coin_balance': integer mandatory,
    'game_level': integer mandatory,
