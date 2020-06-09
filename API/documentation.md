@@ -20,7 +20,7 @@ Table of Contents
     - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)
 
 - [Required features](#required-features)
-    - [Wallet/Chip sizes](#wallet-chip-sizes)
+    - [Wallet/Chip sizes](#walletchip-sizes)
     - [Custom bet sizes](#custom-bet-sizes)
     - [Pre-selected bet amount](#pre-selected-bet-amount)
 
