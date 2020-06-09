@@ -5,7 +5,6 @@ Table of Contents
 
 - [Table of Contents](#table-of-contents)
 - [Revision History](#revision-history)
-- [Copyright](#copyright)
 - [Introduction](#introduction)
 - [Getting started](#getting-started)
 - [Additional Parameters](#additional-parameters)
@@ -20,15 +19,20 @@ Table of Contents
     - [When to use which call](#when-to-use-which-call)
     - [Periodic Wallet Update in Idle Mode](#periodic-wallet-update-in-idle-mode)
 
+- [Required features](#required-features)
+    - [Wallet/Chip sizes](#wallet-chip-sizes)
+    - [Custom bet sizes](#custom-bet-sizes)
+    - [Pre-selected bet amount](#pre-selected-bet-amount)
+
 - [Calls](#calls)
     - [GameSessions](#gamesessions)
         - [GameSessions::get](#gamesessionsget)
         - [GameSessions::wallet](#gamesessionswallet)
-        - [GameSessions::play](#gamesessionsplay)
         - [GameSessions::bet](#gamesessionsbet)
         - [GameSessions::close](#gamesessionsclose)
         - [GameSessions::cancel](#gamesessionscancel)
         - [GameSessions::validateFreespins](#gamesessionsvalidatefreespins)
+        - [GameSessions::play](#gamesessionsplay)
     - [GameEvents](#gameevents)
         - [GameEvents::trigger](#gameeventstrigger)
 
@@ -53,11 +57,12 @@ Revision History
 | 1.3.7       | 22.05.2019 | Added documentation about defaultBet | sambros |
 | 1.3.7.1     | 19.11.2019 | Remove info about animation | mkercmar |
 | 1.3.7.2     | 27.01.2020 | Changed timestmp to integer | mkercmar |
+| 1.4         | 09.06.2020 | Added required features section | mkercmar |
 
 Copyright
 =========
 
-Copyright © 2014 - 2019 Whow Games GmbH. All rights reserved.
+Copyright © 2014 - 2020 Whow Games GmbH. All rights reserved.
 
 Introduction
 ============
@@ -68,7 +73,7 @@ This document is intended for software developers and other technical positions.
 Getting started
 ===============
 
-The Whow API is based on open standards, such as JSON, so you can use any language of choice to access the Whow API. So far we do not have any official framework that helps you connect your application to our API. However it is a goal of us to have frameworks for several languages that will help you connect your application to the Whow API.
+The Whow API is based on open standards, such as JSON, so you can use any language of choice to access the Whow API. So far we do not have any official framework that helps you connect your application to our API.
 
 It is crucial that all of your requests to the Whow API are sent from a server. If you send requests from a client your key pair can be hijacked and used to manipulate critical user data. More on this topic can be found within the Authentication chapter in this documentation.
 
@@ -238,19 +243,75 @@ Best Practises
 Before you get an overview over all calls it would be good to give you some tips about what is best practise with our API and what you should try to avoid.
 
 When to use which call
---------------------------
+----------------------
 
-It’s importand for the users feeling, that you’re going to fire the calls when the user finaly sees the numbers. Otherwise he will be notified with the new chips, before he sees what he got in your game.
+It’s important for the users feeling, that you’re going to fire the calls when the user finaly sees the numbers. Otherwise he will be notified with the new chips, before he sees what he got in your game.
 
-In case of auto play, it’s good practice to use the [GameSessions::play](#gamesessionsplay) call.
+Best practice for a spin would be:
 
-If the user wins some bonus games or gambeling. Please use [GameSessions::bet](#gamesessionsbet) and [GameSessions::close](#gamesessionsclose) instead.
+1. Call *GameSessions::bet*, this method will deduct the chips from the wallet balance
+
+2. Start spinning the wheels, animation should end before doing other calls
+
+3. (Optional) If a user won and have a bonus game mechanic like a win ladder user should have the option to use it
+
+4. Call *GameSessions::close*, **with** and also **without** a winning, so we know the spin ended
 
 Periodic Wallet Update in Idle Mode
---------------------------
+-----------------------------------
 
 Since there are a lot of other actions running on our casino which can cause the users wallet ingame to get out of sync with the one from the casino you should periodically fetch the wallet and update the chips.
 To avoid spamming the API it would be good to only query this information when the game is in some kind of idle mode. This means for example that the user has not done any action within the last 30 seconds. After that time frame it is best to call the API every 30 seconds to fetch a new balance. This can be achieved by using the [GameSessions::wallet](#gamesessionswallet) call.
+
+Required features
+=================
+
+Wallet/Chip sizes
+-----------------
+
+Our total bet sizes have a range of 100 chips up to 100 million chips per spin.
+
+Depending on the win ratios during a spin you need to be able to handle chip values up to billions.
+
+On the wallet size of a user it can therefore go up to trillions chips.
+
+Custom bet sizes
+----------------
+
+As we are an social casino we are using individual bet sizes per user. They are increasing with the level.
+
+On higher levels the lower bet sizes are slowly getting disabled, as they will not have any good experience anymore and higher values are added.
+
+Bets will be initially transmitted on **GameSessions::get** call.
+
+Values can be found in Response: *payload -> game -> settings -> bets*. It is an simple JSON array.
+
+We normally transmit bet per line, for a 20 liner slot it would be f.e.:
+
+```
+"bets":[20,30,50,100,200,400,800,1200,1600,2000,2500]
+```
+
+Or we could optionally configure to send total bets, so it would be f.e.:
+
+```
+"bets":[400,600,1000,2000,4000,8000,16000,24000,32000,40000,50000]
+```
+
+Also every sequent call is returning the bets array as it might increase during a game sessions. Ideally you should be able to change the available bet sizes during a game sessions. (*But: user should be able to continue to play his current bet sizes until he manually adjustes it, do not automatically change the bet amount*)
+
+Pre-selected bet amount
+-----------------------
+
+Our portal has a couple of features where a user can pre-select the inital bet amount which the slot should initially started with.
+
+It is ransmitted on **GameSessions::get** call.
+
+Value can be found in Response: *payload -> game -> settings -> defaultBet*.
+
+Depending on *Custom bet sizes* it is either bet per line or total bet amount.
+
+If no value is transmitted you should use the last played bet size.
 
 Calls
 =====
@@ -457,94 +518,6 @@ The wallet object contains the following parameters:
 | **Status code** | **Description**                                     |
 |-----------------|-----------------------------------------------------|
 | 400             | token seems to be corrupt please request a new one |
-
-GameSessions::play
-------------------
-
-The call *play* is used to instantly play a complete game round with a given bet and win amount. In case you are playing free spins or some other free rounds where the user does not bet currency of his own please use virtualAmount instead of betAmount. If betAmount + virtualAmount equals zero the call will fail.
-
-#### HTTP Method
-
->POST
-
-#### URL
-
-><https://api.jackpot.de/game\_sessions/action/play/{:token}>
-
->The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
-
-#### Payload
-
->The following payload parameters are required:
->
-| **Name**      | **Type** | **Example Value**  | **Description**                                |
-|---------------|----------|--------------------|------------------------------------------------|
-| betAmount     | Float    | 1250               | amount to bet in this round                    |
-| virtualAmount | Float    | 0                  | amount to bet in case of free spins; important: this parameter is optional and only used in special cases for freespins!         |
-| winAmount     | Float    | 0                  | amount the user will win in this round         |
-
-####
-
-#### Example request
-
->URL
->
->     POST <https://api.jackpot.de/game_sessions/action/play/53fdadc3499a9f85368b4567>
->
-> Payload
->
->     {"betAmount":1250,"winAmount":0}
-
-#### Response on success
-
-The following objects will be within the payload object in the JSON response:
-
-| **Name** | **Type** | **Example Value**                     | **Description**   |
-|----------|----------|---------------------------------------|-------------------|
-| user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
-| round    | Object   | {"id":[{…}]…}                         | game round object |
-| game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
-
-The user object can contain the following parameters but doesn’t need to have them:
-
-| **Name**      | **Type** | **Example Value**     | **Description**                                                       |
-|---------------|----------|-----------------------|-----------------------------------------------------------------------|
-| wallet        | Object   | {"chips": 1250.00}    | wallet object                                                         |
-
-The wallet object contains the following parameters:
-
-| **Name** | **Type**    | **Example Value** | **Description**                |
-|----------|-------------|-------------------|--------------------------------|
-| chips    | Float(19,4) | 1250.5000         | chip amount of the user wallet |
-
-The game round object contains the following parameters:
-
-| **Name** | **Type**     | **Example Value**      | **Description**                                                              |
-|----------|--------------|------------------------|------------------------------------------------------------------------------|
-| id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
-| betAmount | Integer     | 6250                   | total bet amount of round |
-| winAmount | Integer     | 2000                   | total win amount of round |
-| timestamp | Integer      | 1502200341 | timestamp of last change |
-
-The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
-
-| **Name**     | **Type** | **Example Value**        | **Description**                                   |
-|--------------|----------|--------------------------|---------------------------------------------------|
-| settings     | Object   | {"bets": [50, 100, 250]} | settings object                                   |
-
-The game settings object contains the following parameters:
-
-| **Name** | **Type** | **Example Value** | **Description**             |
-|----------|----------|-------------------|-----------------------------|
-| bets     | Array    | [50, 100, 250]    | currently allowed bet sizes |
-
-#### Response on failure
-
-| **Status code** | **Description**                                     |
-|-----------------|-----------------------------------------------------|
-| 110             | error while trying to book chips from/to the user, most likely the user has not enough chips |
-| 400             | token seems to be corrupt please request a new one |
-| 400             | parameters are missing                              |
 
 GameSessions::bet
 -----------------
@@ -855,14 +828,105 @@ The following objects will be within the payload object in the JSON response:
 |-----------------|-----------------------------------------------------|
 | 400             | token seems to be corrupt please request a new one  |
 
+GameSessions::play
+------------------
+
+The call *play* is used to instantly play a complete game round with a given bet and win amount. In case you are playing free spins or some other free rounds where the user does not bet currency of his own please use virtualAmount instead of betAmount. If betAmount + virtualAmount equals zero the call will fail.
+
+#### HTTP Method
+
+>POST
+
+#### URL
+
+><https://api.jackpot.de/game\_sessions/action/play/{:token}>
+
+>The *{:token}* parameter is the token assigned to your game session which was handed over to your game on startup.
+
+#### Payload
+
+>The following payload parameters are required:
+>
+| **Name**      | **Type** | **Example Value**  | **Description**                                |
+|---------------|----------|--------------------|------------------------------------------------|
+| betAmount     | Float    | 1250               | amount to bet in this round                    |
+| virtualAmount | Float    | 0                  | amount to bet in case of free spins; important: this parameter is optional and only used in special cases for freespins!         |
+| winAmount     | Float    | 0                  | amount the user will win in this round         |
+
+####
+
+#### Example request
+
+>URL
+>
+>     POST <https://api.jackpot.de/game_sessions/action/play/53fdadc3499a9f85368b4567>
+>
+> Payload
+>
+>     {"betAmount":1250,"winAmount":0}
+
+#### Response on success
+
+The following objects will be within the payload object in the JSON response:
+
+| **Name** | **Type** | **Example Value**                     | **Description**   |
+|----------|----------|---------------------------------------|-------------------|
+| user     | Object   | {"wallet": {"chips":1250.00}}         | user object       |
+| round    | Object   | {"id":[{…}]…}                         | game round object |
+| game     | Object   | {"settings":{"bets": [50, 100, 250]}} | game object       |
+
+The user object can contain the following parameters but doesn’t need to have them:
+
+| **Name**      | **Type** | **Example Value**     | **Description**                                                       |
+|---------------|----------|-----------------------|-----------------------------------------------------------------------|
+| wallet        | Object   | {"chips": 1250.00}    | wallet object                                                         |
+
+The wallet object contains the following parameters:
+
+| **Name** | **Type**    | **Example Value** | **Description**                |
+|----------|-------------|-------------------|--------------------------------|
+| chips    | Float(19,4) | 1250.5000         | chip amount of the user wallet |
+
+The game round object contains the following parameters:
+
+| **Name** | **Type**     | **Example Value**      | **Description**                                                              |
+|----------|--------------|------------------------|------------------------------------------------------------------------------|
+| id       | String       | 20a7bafff1b24f22b33d8f128a00e54d | round id |
+| betAmount | Integer     | 6250                   | total bet amount of round |
+| winAmount | Integer     | 2000                   | total win amount of round |
+| timestamp | Integer      | 1502200341 | timestamp of last change |
+
+The game object can contain the following parameters but doesn’t need to have them. Most likely game settings are changed on a user level up for example:
+
+| **Name**     | **Type** | **Example Value**        | **Description**                                   |
+|--------------|----------|--------------------------|---------------------------------------------------|
+| settings     | Object   | {"bets": [50, 100, 250]} | settings object                                   |
+
+The game settings object contains the following parameters:
+
+| **Name** | **Type** | **Example Value** | **Description**             |
+|----------|----------|-------------------|-----------------------------|
+| bets     | Array    | [50, 100, 250]    | currently allowed bet sizes |
+
+#### Response on failure
+
+| **Status code** | **Description**                                     |
+|-----------------|-----------------------------------------------------|
+| 110             | error while trying to book chips from/to the user, most likely the user has not enough chips |
+| 400             | token seems to be corrupt please request a new one |
+| 400             | parameters are missing                              |
+
 GameEvents
 ------
+
 GameEvents::trigger
 --------------------
 
 The call *trigger* is used to trigger events based on an event type and additional event data, depending on the event type. Further details regarding events can be found within the [game_events.md](https://github.com/whowgames/documentation/blob/master/API/game_events.md) document, which is located in our document repository on github.com.
 
 Since the events parameter is an array you can publish multiple events at the same time.
+
+It should be seen as kind of fire and forget, at least the transmission should be non-blocking and do not prevent any further user interaction with the slot.
 
 #### HTTP Method
 
@@ -912,4 +976,3 @@ In case of a successful event transmission the payload within the response will 
 | 400             | token seems to be corrupt please request a new one |
 | 401             | unknown event type |
 | 402             | missing paramter for given event type |
-
