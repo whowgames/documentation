@@ -173,6 +173,13 @@ Request body:
     'allow_sms': integer|null optional (Options: 0, 1),
     'social_type': string|null optional (Options: 'facebook', 'vkontakte', 'rambler', 'naszaklasa', 'minijuegos'),
     'social_id': string|null optional,
+    'utm_source': string|null optional,
+    'utm_medium': string|null optional,
+    'utm_term': string|null optional,
+    'utm_content': string|null optional,
+    'utm_campaign': string|null optional,
+    'utm_pub': string|null optional,
+    'source_links': array|null optional
   },
   ...
 ]
