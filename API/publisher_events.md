@@ -43,10 +43,10 @@ Example Message:
 
 ```json
 {
-    type: "gameLoaded",
-    token: "95434fcf2653091660c7320",
-    payload: {
-        time: 1000,
+    "type": "gameLoaded",
+    "token": "95434fcf2653091660c7320",
+    "payload": {
+        "time": 1000,
     }
 }
 ```
