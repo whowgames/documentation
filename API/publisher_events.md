@@ -9,14 +9,17 @@ Table of Contents
 - [Introduction](#introduction)
 - [Events](#events)
   - [Example Message:](#example-message)
-  - [Type: onGameLoaded](#type-ongameloaded)
+  - [Type: gameLoaded](#type-gameloaded)
       - [Parameters](#parameters)
+  - [Type: gameError](#type-gameerror)
+      - [Parameters](#parameters-1)
 
 Revision History
 ================
 
 | **Version** | **Date**   | **Changes**                                        | **Name**  |
 |-------------|------------|----------------------------------------------------|-----------|
+| 0.1.1       | 05.04.2021 | Added game error call                                    | sambros |
 | 0.1.0       | 01.03.2021 | Initial version                                    | sambros |
 
 Copyright
@@ -51,7 +54,7 @@ Example Message:
 }
 ```
 
-Type: onGameLoaded
+Type: gameLoaded
 ---------
 
 *gameLoaded* is used whenever the game finished loading. It's importand to measure loading performance of the slot.
@@ -64,3 +67,27 @@ Type: onGameLoaded
 | token     | String   | 95434fcf2653091660c7320 | game token | **YES** |
 | payload     | Object   | {} | empty payload | **YES** |
 | payload.time     | Number   | 1000 | time of milliseconds until the game was fully loaded | **YES** |
+
+Type: gameError
+---------
+
+*gameError* is used whenever the game finished loading. It's importand to measure loading performance of the slot.
+
+Additional *ErrorCodes* (please forward all error codes given from whow too)
+| **Code** | **Meaning**
+|----------|----------|
+| 101     | Invalid payload/malformed response   |
+| 102     | CURL/Protocol error   |
+| 103     | timeout   |
+| 104     | invalid gateway   |
+| 105 | error 500 |
+
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | "gameError" | event type | **YES** |
+| token     | String   | 95434fcf2653091660c7320 | game token | **YES** |
+| payload     | Object   | {} | empty payload | **YES** |
+| payload.errorCode     | Number   | ErrorCodes | What error happened. Please see above | **YES** |
