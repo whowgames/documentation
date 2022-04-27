@@ -81,6 +81,7 @@ Additional *ErrorCodes* (please forward all error codes given from whow too)
 | 103     | timeout   |
 | 104     | invalid gateway   |
 | 105 | error 500 |
+| 110 | invalid wallet |
 
 
 #### Parameters
