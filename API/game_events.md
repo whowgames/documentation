@@ -58,7 +58,7 @@ Type: win
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "bet" | event type | **YES** |
+| type     | String   | "win" | event type | **YES** |
 | betAmount | Float(19.4) | 1250 | chip amount bet to achieve this win amount | **YES** |
 | value    | Float(19.4) | 1250000 | winning chip amount | **YES** |
 | winType | String | "normal" or "big" or "mega" or "monster" or "legendary" | displayed type of the win within the slot | **YES** |
