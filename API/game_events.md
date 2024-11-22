@@ -11,6 +11,7 @@ Table of Contents
 	- [Type: win](#type-win)
 	- [Type: scatters](#type-scatters)
 	- [Type: freespins](#type-freespins)
+ 	- [Type: triggerFreespins](#type-triggerfreespins)
 	- [Type: casinoFreespins](#type-casinofreespins)
 	- [Type: bonusGameWin](#type-bonusgamewin)
 	- [Type: betSizeChange](#type-betsizechange)
@@ -58,10 +59,10 @@ Type: win
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "win" | event type | **YES** |
+| type     | String   | `win` | event type | **YES** |
 | betAmount | Float(19.4) | 1250 | chip amount bet to achieve this win amount | **YES** |
 | value    | Float(19.4) | 1250000 | winning chip amount | **YES** |
-| winType | String | "normal" or "big" or "mega" or "monster" or "legendary" | displayed type of the win within the slot | **YES** |
+| winType | String | `normal` or `big` or `mega` or `monster` or `legendary` | displayed type of the win within the slot | **YES** |
 | isFreeGameWin| Bool | true or false | is this win inside a free spin round | **YES** |
 | sumFreeGameWin| Float(19.4) | 1250000 | sum of the current freeSpin wins | **NO** |
 
@@ -74,12 +75,12 @@ Type: scatters
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "scatters" | event type | **YES** |
+| type     | String   | `scatters` | event type | **YES** |
 | symbol     | Integer   | 4 | id of the scatter symbol | **YES** |
 | positions | Array |[[],[0,1],[],[1],[2]] | position of scatters on the reels | **YES** |
 | value    | Float(19.4) | 1250000 | win amount of scatter symbols | **YES** |
 
-The positions array describes where on the reels the scatters are placed. Reels without scatter symbols are represented by an empty array "[]". Reels are always represented from left to right and top to bottom. Scatter positions always start with 0. In the example there are two scatters on the first and second position on the second reel and one scatter each on reel four, second from top, and five, third from top.
+The positions array describes where on the reels the scatters are placed. Reels without scatter symbols are represented by an empty array `[]`. Reels are always represented from left to right and top to bottom. Scatter positions always start with 0. In the example there are two scatters on the first and second position on the second reel and one scatter each on reel four, second from top, and five, third from top.
 
 Type: freespins
 ---------------
@@ -90,7 +91,7 @@ Type: freespins
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "freespins" | event type | **YES** |
+| type     | String   | `freespins` | event type | **YES** |
 | value    | Integer | 10 | amount of freespins gained | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the freespins are played | **YES** |
 | inFreespins | Boolean | false | freespins won while playing freespins - defaults to false | **NO** |
@@ -104,9 +105,25 @@ Type: casinoFreespins
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "casinoFreespins" | event type | **YES** |
+| type     | String   | `casinoFreespins` | event type | **YES** |
 | value    | Integer | 10 | amount of freespins gained | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the freespins are played | **YES** |
+
+Type: triggerFreespins
+---------------------
+
+*triggerFreespins* is used whenever the game triggers freespins coming either from the `game` itself, the `casino`, or via `buy-feature`.
+
+#### Parameters
+
+| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
+|----------|----------|-------------------|-----------------|------------------|
+| type     | String   | `triggerFreespins` | event type | **YES** |
+| source | String | `game` |  Origin of the freespin(s). One of `game` (gained in the slot),  `casino` (granted by casino, received on `GameSessions::get`), or bought via `buy-feature` | **YES** |
+| amount    | Integer | 1 | amount of freespins triggered | **YES** |
+| betAmount | Integer | 12500 | value of all freespins that this call covers. In case of `source='buy-feature'`, this is the amount of chips that the user paid for the freespins | **YES** |
+| winAmount | Integer | 12500 | amount of chips won by the freespins | **No** |
+
 
 Type: bonusGameWin
 ---------------------
@@ -117,7 +134,7 @@ Type: bonusGameWin
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "bonusGameWin" | event type | **YES** |
+| type     | String   | `bonusGameWin` | event type | **YES** |
 | value    |  Float(19.4) | 1250000 | winning chip amount | **YES** |
 | betAmount | Integer | 12500 | bet amount with which the bonus game is played | **YES** |
 
@@ -130,7 +147,7 @@ Type: betSizeChange
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "betSizeChange" | event type | **YES** |
+| type     | String   | `betSizeChange` | event type | **YES** |
 | value    | Float(19.4) | 12500 | new bet size | **YES** |
 
 Type: lineNumberChange
@@ -142,7 +159,7 @@ Type: lineNumberChange
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "lineNumberChange" | event type | **YES** |
+| type     | String   | `lineNumberChange` | event type | **YES** |
 | value    | Integer | 25 | new line number | **YES** |
 
 Type: autoSpin
@@ -154,7 +171,7 @@ Type: autoSpin
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "autoSpin" | event type | **YES** |
+| type     | String   | `autoSpin` | event type | **YES** |
 | value    | Boolean | true | auto spin on or off | **YES** |
 
 Type: fastSpin
@@ -166,7 +183,7 @@ Type: fastSpin
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "fastSpin" | event type | **YES** |
+| type     | String   | `fastSpin` | event type | **YES** |
 | value    | Boolean | true | fast spin on or off | **YES** |
 
 Type: maxiPlay
@@ -179,7 +196,7 @@ This event refers to a special game mode from Gamomat games.
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "maxiPlay" | event type | **YES** |
+| type     | String   | `maxiPlay` | event type | **YES** |
 | value    | Boolean | true | maxi play on or off | **YES** |
 
 Type: fullRow
@@ -191,7 +208,7 @@ Type: fullRow
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "fullRow" | event type | **YES** |
+| type     | String   | `fullRow` | event type | **YES** |
 | value    | Integer | 5 | how many in a row | **YES** |
 | wildcard    | Boolean | true | reached using wildcards (wilds) | **YES** |
 | symbols    | Array | [0, 0, 1] | which symbols | **YES** |
@@ -205,7 +222,7 @@ Type: symbols
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "symbols" | event type | **YES** |
+| type     | String   | `symbols` | event type | **YES** |
 | value    | Array | [1, 3, 5, 7, 9, 1, 2, 4, 6, 7, 8, 9, 10, 12, 14] | each element should represent a symbol number | **YES** |
 | betAmount | Integer | 12500 | bet amount of spin | **YES** |
 
@@ -218,7 +235,7 @@ Type: symbolsWin
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "symbolsWin" | event type | **YES** |
+| type     | String   | `symbolsWin` | event type | **YES** |
 | value    | Array | [1, 3, 5, 7, 9, 1, 2, 4, 6, 7, 8, 9, 10, 12, 14] | each element should represent a symbol number | **YES** |
 | betAmount | Integer | 12500 | bet amount of spin | **YES** |
 
@@ -237,7 +254,7 @@ Current SubTypes are:
 
 | **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
 |----------|----------|-------------------|-----------------|------------------|
-| type     | String   | "special" | event type | **YES** |
-| subType | String | "expandingWild" | name of the special event | **NO** |
+| type     | String   | `special` | event type | **YES** |
+| subType | String | `expandingWild` | name of the special event | **NO** |
 | value    | Integer | 1 | event value | **YES** |
 | betAmount | Integer | 12500 | bet amount of spin | **YES** |
