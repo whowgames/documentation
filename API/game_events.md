@@ -249,6 +249,8 @@ Current SubTypes are:
 * substitute
 * winMultiplier
 * stickyWild
+* tutorialFinish
+* tutorialAbort
 
 #### Parameters
 
