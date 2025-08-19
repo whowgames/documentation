@@ -19,7 +19,7 @@ Revision History
 
 | **Version** | **Date**   | **Changes**                                        | **Name**  |
 |-------------|------------|----------------------------------------------------|-----------|
-| 0.1.2       | 16.08.2025 | Updated description of error codes                                    | sambros |
+| 0.1.2       | 16.08.2025 | Updated description of error codes                                    | jklingsporn |
 | 0.1.1       | 05.04.2021 | Added game error call                                    | sambros |
 | 0.1.0       | 01.03.2021 | Initial version                                    | sambros |
 
