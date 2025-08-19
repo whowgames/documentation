@@ -19,6 +19,7 @@ Revision History
 
 | **Version** | **Date**   | **Changes**                                        | **Name**  |
 |-------------|------------|----------------------------------------------------|-----------|
+| 0.1.2       | 16.08.2025 | Updated description of error codes                                    | sambros |
 | 0.1.1       | 05.04.2021 | Added game error call                                    | sambros |
 | 0.1.0       | 01.03.2021 | Initial version                                    | sambros |
 
@@ -76,12 +77,12 @@ Type: gameError
 Additional *ErrorCodes* (please forward all error codes given from whow too)
 | **Code** | **Meaning**
 |----------|----------|
-| 101     | Invalid payload/malformed response   |
-| 102     | CURL/Protocol error   |
-| 103     | timeout   |
-| 104     | invalid gateway   |
-| 105 | error 500 |
-| 110 | invalid wallet |
+| 101     | Invalid payload/malformed response from GameSessions-API  |
+| 102     | Other CURL/Protocol errors, such as SSL issues   |
+| 103     | Timeout of publisher backend  |
+| 104     | Invalid gateway / GameSessions-API timeout   |
+| 105 | GameSessions-API returned error 500 while processing request |
+| 110 | Invalid wallet returned by GameSessions-API |
 
 
 #### Parameters
