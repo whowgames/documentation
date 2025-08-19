@@ -71,7 +71,7 @@ Type: gameLoaded
 Type: gameError
 ---------
 
-*gameError* is used whenever the game finished loading. It's importand to measure loading performance of the slot.
+*gameError* is used whenever the game failed loading.
 
 Additional *ErrorCodes* (please forward all error codes given from whow too)
 | **Code** | **Meaning**
