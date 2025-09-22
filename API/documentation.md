@@ -444,6 +444,7 @@ The game settings object contains the following parameters:
 |----------|----------|-------------------|-----------------------------|
 | bets     | Array    | [400, 8000, 125000]    | currently allowed bet sizes |
 | defaultBet     | Integer    | 40000    | default bet which should be selected on start (even if it does not exist in bets). Can be "null", then please use the last played bet size |
+| rtp | Float | 85 | If defined, the slot should use that given rtp. ***Important*** it can change on *every* call |
 
 The freespins object contains the following parameters:
 
