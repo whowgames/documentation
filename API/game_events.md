@@ -27,11 +27,12 @@ Table of Contents
 Revision History
 ================
 
-| **Version** | **Date**   | **Changes**                                        | **Name**  | **Approved** |
-|-------------|------------|----------------------------------------------------|-----------|--------------|
-| 0.1.0       | 13.06.2016 | Initial version                                    | fschemmer | -            |
-| 0.1.1       | 18.10.2016 | Added casinoFreespins                              | fschemmer | -            |
-| 0.1.2       | 07.09.2018 | Changed win fields                              | sambros | -            |
+| **Version** | **Date**   | **Changes**                    | **Name**    | **Approved** |
+|-------------|------------|--------------------------------|-------------|--------------|
+| 0.1.0       | 13.06.2016 | Initial version                | fschemmer   | -            |
+| 0.1.1       | 18.10.2016 | Added casinoFreespins          | fschemmer   | -            |
+| 0.1.2       | 07.09.2018 | Changed win fields             | sambros     | -            |
+| 0.2.0       | 16.04.2026 | Add tutorialStep documentation | jklingsporn | -            |
 
 Copyright
 =========
@@ -251,12 +252,14 @@ Current SubTypes are:
 * stickyWild
 * tutorialFinish
 * tutorialAbort
+* tutorialStep
 
 #### Parameters
 
-| **Name** | **Type** | **Example Value** | **Description** |  **Mandatory**   |
-|----------|----------|-------------------|-----------------|------------------|
-| type     | String   | `special` | event type | **YES** |
-| subType | String | `expandingWild` | name of the special event | **NO** |
-| value    | Integer | 1 | event value | **YES** |
-| betAmount | Integer | 12500 | bet amount of spin | **YES** |
+| **Name**  | **Type** | **Example Value** | **Description**                                                                           |  **Mandatory**   |
+|-----------|----------|-------------------|-------------------------------------------------------------------------------------------|------------------|
+| type      | String   | `special`         | event type                                                                                | **YES** |
+| subType   | String | `expandingWild`   | name of the special event                                                                 | **NO** |
+| value     | Integer | 1                 | event value                                                                               | **YES** |
+| betAmount | Integer | 12500             | bet amount of spin                                                                        | **YES** |
+| action    | String | `spin1`           | in case of subType `tutorialStep`, this carries out the information of what has happened. | **NO** |
