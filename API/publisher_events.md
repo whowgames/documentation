@@ -1,5 +1,9 @@
 **Publisher events**
 
+# Deprectation Information
+This documentation is no longer maintained and only kept for reference. This API has been replaced by
+[Slot Control Messaging Protocol](slot_control_messaging_protocol.md). 
+
 Table of Contents
 =================
 
