@@ -104,7 +104,7 @@ Indicates that the spin cycle has completed and the reels have stopped.
 }
 ```
 
-## **2.8 JACKPOT:UPDATE_PAYLINES** {#2.8-jackpot:update_paylines}
+## **2.8 JACKPOT:UPDATE_PAYLINES** 
 
 Sent, when the slot allows the user to change the paylines. **Important**: if the slot is expecting to receive bet sizes per line, it is also expected that this event is sent once after the JACKPOT:SLOT_LOADED event, to initialize the remote control with the default number of paylines (regardless of whether the paylines can be changed in the slot).
 
@@ -115,7 +115,7 @@ Sent, when the slot allows the user to change the paylines. **Important**: if th
 }
 ```
 
-## **2.9 JACKPOT:UPDATE_EXTRABET** {#2.9-jackpot:update_extrabet}
+## **2.9 JACKPOT:UPDATE_EXTRABET** 
 
 Sent, when the slot has an “extra bet” feature, that adds on top of the default bet size. It is expected that this event is also sent once after the JACKPOT:SLOT_LOADED event, to initialize the remote control with the default extra bet value.
 
@@ -201,7 +201,7 @@ Requests setting the bet size to the maximum allowed value. The slot should emit
 }
 ```
 
-# **4. Optional Events the Slot *Should* Handle (Wrapper → Publisher)** {#4.-optional-events-the-slot-should-handle-(wrapper-→-publisher)}
+# **4. Optional Events the Slot *Should* Handle (Wrapper → Publisher)** 
 
 ## **4.1 JACKPOT:BETSIZE** {#4.1-jackpot:betsize}
 
