@@ -203,7 +203,7 @@ Requests setting the bet size to the maximum allowed value. The slot should emit
 
 # **4. Optional Events the Slot *Should* Handle (Wrapper → Publisher)** 
 
-## **4.1 JACKPOT:BETSIZE** {#4.1-jackpot:betsize}
+## **4.1 JACKPOT:BETSIZE** 
 
 Sets the betsize to the value provided in the payload. The slot should emit a JACKPOT:UPDATE_BETSIZE with the new bet size afterwards. If the user is in a freespin game or any other bonus round, during which the bet size can not be changed, the slot should ignore the event and just return an JACKPOT:UPDATE_BETSIZE with the current bet size.
 
@@ -214,7 +214,7 @@ Sets the betsize to the value provided in the payload. The slot should emit a JA
 }
 ```
 
-## **4.2 JACKPOT:TOGGLE_UI** {#4.2-jackpot:toggle_ui}
+## **4.2 JACKPOT:TOGGLE_UI** 
 
 Hide or show the slot controls (like spin button, etc) in the main slot UI. 
 
