@@ -30,17 +30,33 @@ window.addEventListener("message", (event) => {
 
 # **2. Events the Slot Must Send (Publisher → Wrapper)**
 
-## **2.1 JACKPOT:SLOT_LOADED**
+## **2.1 JACKPOT:SLOT_RENDERED**
 
-Indicates that the slot has fully loaded all internal assets, logic, and UI. This event can be used as a trigger to display external UI controls.
+Indicates that the slot has finished loading all internal assets, logic, and UI, and that the first frame has been rendered on screen.
+
+This event must be sent **before** any introduction, splash, tutorial, or confirmation screen is displayed, and must **not** wait for the user to dismiss such a screen. The wrapper uses it exclusively to measure loading time; it is not a trigger for external UI controls.
+
+Slots without an introduction screen must send this event as well, immediately followed by JACKPOT:SLOT_LOADED.
 
 ```
 {  
-  "type": "JACKPOT:SLOT_LOADED",  
+  "type": "JACKPOT:SLOT_RENDERED"  
 }
 ```
 
-## **2.2 JACKPOT:AUTOSPIN**
+## **2.2 JACKPOT:SLOT_LOADED**
+
+Indicates that the slot is ready for user interaction, i.e. that any introduction, splash, tutorial, or confirmation screen has been dismissed and the player can operate the reels. This event is the trigger to display external UI controls, and is the reference point for the initialization events described in 2.6, 2.9 and 2.10.
+
+This event is always preceded by JACKPOT:SLOT_RENDERED. If the slot has no introduction screen, both events are sent back to back.
+
+```
+{  
+  "type": "JACKPOT:SLOT_LOADED"  
+}
+```
+
+## **2.3 JACKPOT:AUTOSPIN**
 
 Indicates that the user has enabled or disabled autoplay within the slot UI.
 
@@ -51,7 +67,7 @@ Indicates that the user has enabled or disabled autoplay within the slot UI.
 }
 ```
 
-## **2.3 JACKPOT:FAST_MODE**
+## **2.4 JACKPOT:FAST_MODE**
 
 Indicates that the fast mode state inside the slot has changed. The payload reflects the resulting fast mode state.
 
@@ -62,7 +78,7 @@ Indicates that the fast mode state inside the slot has changed. The payload refl
 }
 ```
 
-## **2.4 JACKPOT:SOUND**
+## **2.5 JACKPOT:SOUND**
 
 Indicates that the sound state inside the slot has changed. If multiple sound channels exist, enabled must be false only if all channels are disabled.
 
@@ -73,7 +89,7 @@ Indicates that the sound state inside the slot has changed. If multiple sound ch
 }
 ```
 
-## **2.5 JACKPOT:UPDATE_BETSIZE**
+## **2.6 JACKPOT:UPDATE_BETSIZE**
 
 Sent whenever the user changes the bet size through the slot UI. It is expected that this event is also sent once after the JACKPOT:SLOT_LOADED event, to initialize the remote control with the current bet size.
 
@@ -84,7 +100,7 @@ Sent whenever the user changes the bet size through the slot UI. It is expected 
 }
 ```
 
-## **2.6 JACKPOT:SPIN_START**
+## **2.7 JACKPOT:SPIN_START**
 
 Indicates that the reels have started spinning.
 
@@ -94,7 +110,7 @@ Indicates that the reels have started spinning.
 }
 ```
 
-## **2.7 JACKPOT:SPIN_COMPLETE**
+## **2.8 JACKPOT:SPIN_COMPLETE**
 
 Indicates that the spin cycle has completed and the reels have stopped.
 
@@ -104,7 +120,7 @@ Indicates that the spin cycle has completed and the reels have stopped.
 }
 ```
 
-## **2.8 JACKPOT:UPDATE_PAYLINES** 
+## **2.9 JACKPOT:UPDATE_PAYLINES** 
 
 Sent, when the slot allows the user to change the paylines. **Important**: if the slot is expecting to receive bet sizes per line, it is also expected that this event is sent once after the JACKPOT:SLOT_LOADED event, to initialize the remote control with the default number of paylines (regardless of whether the paylines can be changed in the slot).
 
@@ -115,7 +131,7 @@ Sent, when the slot allows the user to change the paylines. **Important**: if th
 }
 ```
 
-## **2.9 JACKPOT:UPDATE_EXTRABET** 
+## **2.10 JACKPOT:UPDATE_EXTRABET** 
 
 Sent, when the slot has an “extra bet” feature, that adds on top of the default bet size. It is expected that this event is also sent once after the JACKPOT:SLOT_LOADED event, to initialize the remote control with the default extra bet value.
 
@@ -226,7 +242,7 @@ Hide or show the slot controls (like spin button, etc) in the main slot UI.
 
 # **5. Optional Events the Slot *Should* Send (Publisher → Wrapper)**
 
-## **2.1 JACKPOT:GAME_ERROR**
+## **5.1 JACKPOT:GAME_ERROR**
 
 Sent, whenever there is an error during slot processing. Please provide one of the codes from the table below. If you think there is a case which is not covered by the existing codes, please contact us and we’ll update the table accordingly.
 
